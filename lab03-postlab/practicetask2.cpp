@@ -18,23 +18,23 @@ cout << "You have Entered " << num1 << " " << num2 << " " << num3 << " " << num4
 << " as First , Second , Third , Fourth and Fifth Number Respectively. " << endl << endl ;
    if (num5 > num1 && num5 > num2 && num5 > num3 && num5 > num4 ) 
    {
-cout << " Fifth Number  is Greater ";
+cout << "The largest of the 5 numbers is " << num5;
    }
    else if (num4 > num1 && num4 > num2 && num4 > num3 && num4 > num5)
    {
-cout << "Fourth Number is Greater";
+cout << "The largest of the 5 numbers is " << num4;
     }        
    else if (num3 > num1 && num3 > num2 && num3 > num4 && num3 > num5)
    {
-cout << "Third Number is Greater";
+cout << "The largest of the 5 numbers is " << num3;
     }
     else if (num2 > num1 && num2 > num3 && num2 > num3 && num2 > num5)
    {
-cout << "Second Number is Greater";
+cout << "The largest of the 5 numbers is " << num2;
     }      
      else if (num1 > num4 && num1 > num2 && num1 > num3 && num1 > num5)
    {
-cout << "First Number is Greater";
+cout << "The largest of the 5 numbers is " << num1;
     }   
      
 }
