@@ -1,4 +1,4 @@
 # demo1
-This is my firstdemo repository
+This is my college lab tasks practice repository
 <br>
-Author - Mr. Ahmad Kaleem Bhatti 
+Author - Ahmad Kaleem Bhatti 
