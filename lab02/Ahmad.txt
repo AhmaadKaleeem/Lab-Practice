@@ -1,1 +1,0 @@
-File is created. Now you can add data to a file named Ahmad.txt
