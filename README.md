@@ -1,4 +1,4 @@
 # demo1
-This is my college lab tasks practice repository
+This is My College Lab Tasks Practice Repository
 <br>
 Author - Ahmad Kaleem Bhatti 
