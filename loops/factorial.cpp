@@ -1,4 +1,4 @@
-// Write  program to print the multiplication table of a number entered by the user
+// Write  program to print the factorial of a number
 
 
 #include <iostream>
