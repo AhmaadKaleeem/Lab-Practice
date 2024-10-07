@@ -11,9 +11,9 @@ int main()
         int result1 = table1 * a ; 
         int result2 = table2 * a;
         int result3 = table3 * a;
-        std::cout << table1 << " x " << a << " = " << result1<< std::endl;
-        std::cout <<"\t\t\t" << table2 << " x " << a << " = " << result2 << std::endl;
-        std::cout << "\t\t\t\t\t\t" << table3 << " x " << a << " = " << result3 << std::endl;
+        std::cout << "\t" << table1 << " x " << a << " = " << result1;
+        std::cout << "\t\t" << table2 << " x " << a << " = " << result2;
+        std::cout << "\t\t\t" << table3 << " x " << a << " = " << result3 << std::endl;
        
         
        
