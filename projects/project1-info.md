@@ -1,6 +1,6 @@
-Project
+                                               **Project**
 <br>
-Number Pyramid Generator 
+                                       **Number Pyramid Generator**
 <br>
 Objective: Create a program that generates different patterns based on user input, such as a number pyramid, an inverted pyramid, or a triangle.
 <br>
