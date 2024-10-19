@@ -1,4 +1,4 @@
-**Project: Number Pyramid Generator**
+**Project: Bank Account Management System**
 <br> <br>
 **Objective:** 
 Create a Bank Account Management System
