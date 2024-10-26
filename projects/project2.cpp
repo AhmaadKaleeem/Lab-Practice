@@ -14,7 +14,7 @@ Display Account Information : Shows account number, balance, and recent transact
 using namespace std;
 
 // Function to Validate Respective Input Data Type
-int checkinputtype(const string& prompt) {
+long checkinputtype(const string& prompt) {
     int input;
     while (true) {
         cout << prompt;
