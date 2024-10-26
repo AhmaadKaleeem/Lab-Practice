@@ -1,18 +1,19 @@
 // Project: Bank Account Management System
-/*Features:
+/* Features:
 Create an Account : User enters their details,deposit and gets a new account number.
 Deposit Money : User can deposit money into their account.
 Withdraw Money : User can withdraw money, but only if the balance allows.
 Display Account Information : Shows account number, balance, and recent transactions. */
 
 #include <iostream>
-#include <fstream>
+#include <fstream> // For File Handling
 #include <string>
-#include <ctime>
-# include <stdlib.h> //Create Random Numbers
+#include <ctime> 
+# include <stdlib.h> // Create Random Numbers
 #include <limits> // To Handle Wrong Data Type Input
 using namespace std;
 
+// Function to Validate Respective Input Data Type
 int checkinputtype(const string& prompt) {
     int input;
     while (true) {
@@ -31,6 +32,7 @@ int checkinputtype(const string& prompt) {
     }
 }
 
+// Function to Save All Transactions History
 void savetransactiondetails(const string& name, long cnic, long notfixedacc, long balance) {
     ofstream recenttrans("Recent Transactions.txt", ios::app);
     // Check if the file opened successfully
@@ -45,6 +47,8 @@ void savetransactiondetails(const string& name, long cnic, long notfixedacc, lon
     }
 }
 
+
+// Function to Save Withdrawal Transactions History
 void withdrwawalamount(long withdrawal, long balance) {
     ofstream recenttrans("Recent Transactions.txt", ios::app);
     // Check if the file opened successfully
@@ -59,6 +63,7 @@ void withdrwawalamount(long withdrawal, long balance) {
     }
 }
 
+// Function to Save Deposit Transactions History
 void depositamount(long deposit, long balance) {
     ofstream recenttrans("Recent Transactions.txt", ios::app);
     // Check if the file opened successfully
@@ -73,12 +78,46 @@ void depositamount(long deposit, long balance) {
     }
 }
 
+// Function to Save Data and Copy After Exiting System
+void copyvariabledata(const string& name, long notfixedacc, long cnic, long balance) {
+
+    ofstream data("data.txt", ios::trunc);
+    if (data.is_open())
+    {
+        data << name << endl;
+        data << notfixedacc << endl;
+        data << cnic << endl;
+        data << balance << endl;
+        data.close();
+    }
+    else
+    {
+        cout << "There is an Error in Opening The File. \n";
+    }
+
+}
+
+// Function to Recall Data
+bool loadvariableinfo(string& name, long& notfixedacc, long& cnic, long& balance) {
+    ifstream data("data.txt");
+    if (data.is_open()) {
+        if (data >> name >> notfixedacc >> cnic >> balance) {
+            data.close();
+            return true;
+        }
+        else {
+            data.close();
+            return false;
+        }
+    }
+    return false;
+}
 
 int main()
 {
     // Declaring Variables
    // For making a fixed account number before 
-    long  deposit = 0, balance = 0, recent = 0, withdrawal = 0, option = 0, cnic = 0, notfixedacc;
+    long  deposit = 0, balance = 0, recent = 0, withdrawal = 0, option = 0, cnic = 0, notfixedacc=0;
     string name, fixedaccnbr = "05101324";
     ofstream recenttrans; //Using Filehandling
 
@@ -86,6 +125,14 @@ int main()
     cout << "\t\t\t\t Sharif Bank (Ltd) Account Management System " << endl;
     cout << "-----------------------------------------------------------------------------------------------------------------------";
     cout << endl;
+
+    // Load existing account data if available
+    if (loadvariableinfo(name, notfixedacc, cnic, balance)) {
+        cout << "Welcome Back, " << name << "! Your Account Information has been Loaded.\n\n";
+    }
+    else {
+        cout << "No Previous Account Data found. Please create a New Account.\n";
+    }
 
     srand(time(0));
 
@@ -107,7 +154,7 @@ int main()
             recenttrans.close();
 
             cout << "\t\t\t\t""Welcome to Sharif Bank (Ltd) " << "\n";
-            cout << "Enter Your Name (No Spaces) > ";
+            cout << "Enter Your Name (Use Special Letter Insated Of Spaces) > ";
             cin >> name;
 
             // National ID Validation (5-Digit CNIC) with 4 Time Limit
@@ -115,7 +162,7 @@ int main()
             int tryagain = 4;
             while ((cnic > 99999 || cnic < 10000) && tryagain > 0)
             {
-                cout << "Error! National Identification Number Cannot Exceed or Less Than Six Digits \n";
+                cout << "Error! National Identification Number Cannot Exceed or Less Than Five Digits \n";
                 cout << " Please Enter Again (Limit 4 Times) > ";
                 cin >> cnic;
                 tryagain--;
@@ -127,7 +174,7 @@ int main()
             }
 
             balance = checkinputtype("Enter Your Intial Deposit > Rs.");
-          
+
             // Generating Radnom Account Number
             notfixedacc = rand() % 900000 + 100000;
 
@@ -137,16 +184,16 @@ int main()
 
             // Calling Function to Log Details into the File        
             savetransactiondetails(name, notfixedacc, cnic, balance);
+            copyvariabledata(name, notfixedacc, cnic, balance);
 
         }
 
         // Depositing Money
         else if (option == 2)
         {
-           deposit= checkinputtype("Enter The Amount To Deposit Into Your Account : Rs. ");
+            deposit = checkinputtype("Enter The Amount To Deposit Into Your Account : Rs. ");
             if (deposit >= 0)
             {
-                cin >> deposit;
                 balance = balance + deposit;
                 cout << "Your Transaction is Successfully Completed ! " << "\n";
                 cout << "Your New Balance is  Rs. " << balance << "\n\n";
@@ -158,12 +205,13 @@ int main()
 
             // Calling Function to Log Details into the File        
             depositamount(deposit, balance);
+            copyvariabledata(name, notfixedacc, cnic, balance);
         }
 
         // Withdrawal Money
         else if (option == 3)
         {
-            withdrawal= checkinputtype("Enter The Amount To Withdrawal From Your Account : Rs. ");
+            withdrawal = checkinputtype("Enter The Amount To Withdrawal From Your Account : Rs. ");
             if (balance > withdrawal && withdrawal > 0)
             {
                 balance = balance - withdrawal;
@@ -172,6 +220,7 @@ int main()
 
                 // Calling Function to Log Details into the File        
                 withdrwawalamount(withdrawal, balance);
+                copyvariabledata(name, notfixedacc, cnic, balance);
             }
 
             else if (balance < withdrawal)
@@ -188,6 +237,7 @@ int main()
         // Account Information
         else if (option == 4)
         {
+
             cout << "\t\t\t\t Account Information \n";
             cout << "Account Holder Name : " << name << "\n";
             cout << "Account Number: " << fixedaccnbr << notfixedacc << "\n";
