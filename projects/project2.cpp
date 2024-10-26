@@ -9,11 +9,56 @@ Display Account Information : Shows account number, balance, and recent transact
 #include <fstream>
 #include <string>
 using namespace std;
+
+void savetransactiondetails(const string& name, long cnic, long notfixedacc, long balance) {
+    ofstream recenttrans("Recent Transactions.txt", ios::app);
+    // Check if the file opened successfully
+    if (recenttrans.is_open())
+    {
+        recenttrans << "Account Created, User Name: " << name << ", Cnic: " << cnic << ", Account Number: " << notfixedacc << ", New Balance: Rs. " << balance << "\n";// Append data to the file  
+        recenttrans.close();
+    }
+    else
+    {
+        cout << "There is an Error in Opening The File. ";
+    }
+}
+void withdrwawalamount(long withdrawal, long balance) {
+    ofstream recenttrans("Recent Transactions.txt", ios::app);
+    // Check if the file opened successfully
+    if (recenttrans.is_open())
+    {
+        recenttrans << "Withdrawal Rs. " << withdrawal << ", New Balance is Rs. " << balance << "\n";
+        recenttrans.close();
+    }
+    else
+    {
+        cout << "There is an Error in Opening The File. \n";
+    }
+}
+void depositamount(long deposit, long balance) {
+    ofstream recenttrans("Recent Transactions.txt", ios::app);
+    // Check if the file opened successfully
+    if (recenttrans.is_open())
+    {
+        recenttrans << "Deposit Rs. " << deposit << ", New Balance is Rs. " << balance << "\n";
+        recenttrans.close();
+    }
+    else
+    {
+        cout << "There is an Error in Opening The File. \n";
+    }
+}
+   
+
+
+
+
 int main()
 {
     // Declaring Variables
    // For making a fixed account number before 
-    long  deposit = 0.0, balance = 0.0, recent = 0.0, withdrawal, option = 0, cnic = 0, notfixedacc;
+    long  deposit = 0, balance = 0, recent = 0, withdrawal= 0, option = 0, cnic = 0, notfixedacc;
     string name, fixedaccnbr = "05101324";
     ofstream recenttrans; //Using Filehandling
 
@@ -40,6 +85,8 @@ int main()
         // using if else to use the desired option
         if (option == 1)
         {
+            // Clear previous transactions 
+            recenttrans.open("Recent Transactions.txt", ios::trunc); recenttrans.close();
 
             cout << "\t\t\t\t""Welcome to Sharif Bank (Ltd) " << "\n";
             cout << "Enter Your Name (No Spaces) > ";
@@ -75,17 +122,9 @@ int main()
             {
                 cout << "Congratulations " << name << "! You Have Successfully Created Account With Account Number "
                     << fixedaccnbr << notfixedacc << " Against Identification Number " << cnic << "\n\n";
-                // Log Details into the File        
-                recenttrans.open("Recent Transactions.txt", ios::app);
-                if (recenttrans.is_open())
-                { // Check if the file opened successfully
-                    recenttrans << "Account Created, User Name: " << name << ", Cnic: " << cnic << ", Account Number: " << notfixedacc << ", New Balance: Rs. " << balance << "\n";// Append data to the file  
-                }
-                else
-                {
-                    cout << "There is an Error in Opening The File. ";
-                }
-                recenttrans.close();
+
+                // Calling Function to Log Details into the File        
+                savetransactiondetails (name, notfixedacc, cnic, balance);
             }
         }
 
@@ -104,17 +143,9 @@ int main()
             {
                 cout << "Please ! Enter Amount in Positive Value \n\n";
             }
-            // Log Deposit in the file
-            recenttrans.open("Recent Transactions.txt", ios::app);
-            if (recenttrans.is_open())
-            { // Check if the file opened successfully
-                recenttrans << "Deposited Rs. " << deposit << ", New Balance is Rs." << balance << "\n";
-            }
-            else
-            {
-                cout << "There is an Error in Opening The File. \n ";
-            }
-            recenttrans.close();
+
+            // Calling Function to Log Details into the File        
+            depositamount(deposit, balance);
         }
 
         // Withdrawal Money
@@ -128,17 +159,8 @@ int main()
                 cout << "Your Transaction is Successfully Completed ! " << "\n";
                 cout << "Your New Balance is  Rs. " << balance << "\n\n";
 
-                // Log withdrawal in the file
-                recenttrans.open("Recent Transactions.txt",ios::app);
-                if (recenttrans.is_open())
-                { // Check if the file opened successfully
-                    recenttrans << "Withdrawal Rs. " << withdrawal << ", New Balance is Rs. " << balance << "\n";
-                }
-                else
-                {
-                    cout << "There is an Error in Opening The File. \n";
-                }
-                recenttrans.close();
+                // Calling Function to Log Details into the File        
+                withdrwawalamount(withdrawal, balance);
             }
 
             else if (balance < withdrawal)
@@ -182,7 +204,7 @@ int main()
         else if (option == 5)
         {
             cout << "Exiting the System. Thank You for Using Sharif Bank (Ltd).\n";
-            
+
         }
 
         // Checking that the user enerted a valid input 
@@ -192,7 +214,7 @@ int main()
             cout << "Please Choose a Valid Option From 1-5 \n\n";
         }
 
-      
+
     }
 
 }
