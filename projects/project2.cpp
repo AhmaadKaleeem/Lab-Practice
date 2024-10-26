@@ -13,7 +13,7 @@ int main()
 {
     // Declaring Variables
    // For making a fixed account number before 
-    double  deposit=0.0, balance = 0.0, recent = 0.0, withdrawal, option = 0, cnic=0, notfixedacc;
+    long  deposit = 0.0, balance = 0.0, recent = 0.0, withdrawal, option = 0, cnic = 0, notfixedacc;
     string name, fixedaccnbr = "05101324";
     ofstream recenttrans; //Using Filehandling
 
@@ -23,7 +23,7 @@ int main()
     cout << endl;
 
 
-    recenttrans.open("Recent Transactions.txt", ios::app);
+
     while (option != 5)
     {
         cout << " Please Select an Option  ! " << "\n\n";
@@ -42,21 +42,24 @@ int main()
         {
 
             cout << "\t\t\t\t""Welcome to Sharif Bank (Ltd) " << "\n";
-            cout << "Enter Your Name > ";
+            cout << "Enter Your Name (No Spaces) > ";
             cin >> name;
 
-            // Taking Input and Making sure that entered Identification number must be of 5 Digits and using for loop to take same input for 4 times 
+            // National ID Validation (5-Digit CNIC) with 4 Time Limit
             cout << "Enter Your 5 Digit National Identification Number > ";
             cin >> cnic;
-            for (int tryagain = 0; tryagain <= 4; tryagain++) {
-                if (cnic > 99999 || cnic < 10000)
-                {
-                    cout << "Error! National Identification Number Cannot Exceed or Less Than Six Digits \n";
-                    cout << " Please Enter Again (Limit 4 Times) > ";
-                    cin >> cnic;
-                    cout << "\n\n";
-                }
-             
+            int tryagain = 4;
+            while ((cnic > 99999 || cnic < 10000) && tryagain > 0)
+            {
+                cout << "Error! National Identification Number Cannot Exceed or Less Than Six Digits \n";
+                cout << " Please Enter Again (Limit 4 Times) > ";
+                cin >> cnic;
+                tryagain--;
+            }
+            if (tryagain == 0 && (cnic > 99999 || cnic < 10000))
+            {
+                cout << "\n You Failed to Enter Valid National Identification Number, Returning Back to Main Menu \n\n";
+                continue;
             }
 
             // Taking Input and Making sure that entered account number is not greater than or less than six
@@ -72,13 +75,18 @@ int main()
             {
                 cout << "Congratulations " << name << "! You Have Successfully Created Account With Account Number "
                     << fixedaccnbr << notfixedacc << " Against Identification Number " << cnic << "\n\n";
+                // Log Details into the File        
+                recenttrans.open("Recent Transactions.txt", ios::app);
+                if (recenttrans.is_open())
+                { // Check if the file opened successfully
+                    recenttrans << "Account Created, User Name: " << name << ", Cnic: " << cnic << ", Account Number: " << notfixedacc << ", New Balance: Rs. " << balance << "\n";// Append data to the file  
+                }
+                else
+                {
+                    cout << "There is an Error in Opening The File. ";
+                }
+                recenttrans.close();
             }
-
-            if (recenttrans.is_open()) { // Check if the file opened successfully
-                recenttrans << "Name " << name << ", Account Number " << fixedaccnbr << notfixedacc << ", Identification Number " << cnic
-                    << ", Balance " << balance;// Append data to the file
-            }
-
         }
 
         // Depositing Money
@@ -91,14 +99,22 @@ int main()
                 balance = balance + deposit;
                 cout << "Your Transaction is Successfully Completed ! " << "\n";
                 cout << "Your New Balance is  Rs. " << balance << "\n\n";
-                if (recenttrans.is_open()) { // Check if the file opened successfully
-                    recenttrans << "You Have Successfully Deposited Rs. " << deposit << ", Balance " << balance;
-                }
             }
             else
             {
                 cout << "Please ! Enter Amount in Positive Value \n\n";
             }
+            // Log Deposit in the file
+            recenttrans.open("Recent Transactions.txt", ios::app);
+            if (recenttrans.is_open())
+            { // Check if the file opened successfully
+                recenttrans << "Deposited Rs. " << deposit << ", New Balance is Rs." << balance << "\n";
+            }
+            else
+            {
+                cout << "There is an Error in Opening The File. \n ";
+            }
+            recenttrans.close();
         }
 
         // Withdrawal Money
@@ -111,10 +127,20 @@ int main()
                 balance = balance - withdrawal;
                 cout << "Your Transaction is Successfully Completed ! " << "\n";
                 cout << "Your New Balance is  Rs. " << balance << "\n\n";
-                if (recenttrans.is_open()) { // Check if the file opened successfully
-                    recenttrans << "You Have Successfully Withdrawal Rs. " << withdrawal << ", Balance " << balance;
+
+                // Log withdrawal in the file
+                recenttrans.open("Recent Transactions.txt",ios::app);
+                if (recenttrans.is_open())
+                { // Check if the file opened successfully
+                    recenttrans << "Withdrawal Rs. " << withdrawal << ", New Balance is Rs. " << balance << "\n";
                 }
+                else
+                {
+                    cout << "There is an Error in Opening The File. \n";
+                }
+                recenttrans.close();
             }
+
             else if (balance < withdrawal)
             {
                 cout << "Sorry! Your Account Doesn't Have Sufficient Balance. ";
@@ -133,8 +159,21 @@ int main()
             cout << "Account Holder Name : " << name << "\n";
             cout << "Account Number: " << fixedaccnbr << notfixedacc << "\n";
             cout << "Identification Number : " << cnic << "\n";
-            cout << "Current Balance: " << balance << "\n\n";
+            cout << "Current Balance: " << balance << "\n";
 
+            // Show recent transactions by reading from the file
+            ifstream recentFile("Recent Transactions.txt");
+            if (recentFile.is_open()) {
+                cout << "\t\t\t\t  Recent Transactions \n";
+                string transaction;
+                while (getline(recentFile, transaction)) {
+                    cout << transaction << "\n";
+                }
+                recentFile.close();
+            }
+            else {
+                cout << "Error opening the file.\n";
+            }
 
 
         }
@@ -143,17 +182,17 @@ int main()
         else if (option == 5)
         {
             cout << "Exiting the System. Thank You for Using Sharif Bank (Ltd).\n";
-            return 0;
+            
         }
 
         // Checking that the user enerted a valid input 
         else
+
         {
             cout << "Please Choose a Valid Option From 1-5 \n\n";
         }
-        recenttrans.close();
 
-        option++;
+      
     }
 
 }
