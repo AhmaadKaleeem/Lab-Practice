@@ -32,6 +32,37 @@ long checkinputtype(const string& prompt) {
     }
 }
 
+bool pincheck(long& pin, int tryagain = 4) {
+
+    int userpin;
+    while (tryagain > 0)
+    {
+        userpin = checkinputtype("Please, Enter Your Pin (Try Again Limit = 4)> ");
+
+
+        if (userpin > 9999 || userpin < 1000) {
+            cout << " Error! PIN must be a 4-digit number.\n";
+            tryagain--;
+            continue;
+
+        }
+
+        if (userpin == pin) {
+            return true;
+        }
+        else {
+            cout << "Incorrect PIN. Please try again.\n";
+            tryagain--;
+        }
+
+
+
+    }
+    cout << "\n You Failed to Enter Valid Pin, Returning Back to Main Menu \n\n";
+    return false;
+
+}
+
 // Function to Save All Transactions History
 void savetransactiondetails(const string& name, long cnic, long notfixedacc, long balance) {
     ofstream recenttrans("Recent Transactions.txt", ios::app);
@@ -117,7 +148,7 @@ int main()
 {
     // Declaring Variables
    // For making a fixed account number before 
-    long  deposit = 0, balance = 0, recent = 0, withdrawal = 0, option = 0, cnic = 0, notfixedacc=0;
+    long  pin = 0, deposit = 0, balance = 0, recent = 0, withdrawal = 0, option = 0, cnic = 0, notfixedacc = 0;
     string name, fixedaccnbr = "05101324";
     ofstream recenttrans; //Using Filehandling
 
@@ -178,6 +209,20 @@ int main()
             // Generating Radnom Account Number
             notfixedacc = rand() % 900000 + 100000;
 
+            // Create a Pin
+            pin = checkinputtype("Enter Your 4 Digits Pin Code > ");
+            int tryy = 4;
+            while (pin > 9999 || pin < 1000 && tryy > 0) {
+                cout << "Error ! Please Input a 4 Digit Pin \n";
+                cout << "Please Enter Again (Limit 4 Times) > ";
+                cin >> pin;
+                tryy--;
+            }
+            if (tryagain == 0 && (pin > 9999 || cnic < 1000))
+            {
+                cout << "\n You Failed to Enter Valid Pin Code, Returning Back to Main Menu \n\n";
+                continue;
+            }
             // Account Created Successfully
             cout << "Congratulations " << name << "! You Have Successfully Created Account With Account Number "
                 << fixedaccnbr << notfixedacc << " Against Identification Number " << cnic << "\n\n";
@@ -191,6 +236,14 @@ int main()
         // Depositing Money
         else if (option == 2)
         {
+            if (pincheck(pin)) {
+                cout << "PIN verified successfully!\n";
+            }
+            else {
+                cout << "Failed to verify PIN.\n";
+            }
+
+
             deposit = checkinputtype("Enter The Amount To Deposit Into Your Account : Rs. ");
             if (deposit >= 0)
             {
@@ -211,6 +264,13 @@ int main()
         // Withdrawal Money
         else if (option == 3)
         {
+            // Validate Pin to Withdraw
+            if (pincheck(pin)) {
+                cout << "PIN verified successfully!\n";
+            }
+            else {
+                cout << "Failed to verify PIN.\n";
+            }
             withdrawal = checkinputtype("Enter The Amount To Withdrawal From Your Account : Rs. ");
             if (balance > withdrawal && withdrawal > 0)
             {
@@ -237,7 +297,14 @@ int main()
         // Account Information
         else if (option == 4)
         {
+            // Validate Pin To Process
+            if (pincheck(pin)) {
+                cout << "PIN verified successfully!\n";
+            }
+            else {
+                cout << "Failed to verify PIN.\n";
 
+            }
             cout << "\t\t\t\t Account Information \n";
             cout << "Account Holder Name : " << name << "\n";
             cout << "Account Number: " << fixedaccnbr << notfixedacc << "\n";
@@ -279,4 +346,5 @@ int main()
     }
 
 }
+
 
