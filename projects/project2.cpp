@@ -45,11 +45,13 @@ bool pincheck(long& pin, int tryagain = 4) {
         }
         else {
             cout << "Sorry, The Entered Pin is Incorrect.Try Again \n";
+            
             tryagain--;
         }
 
     }
     cout << "\n You Failed to Enter Valid Pin, Returning Back to Main Menu \n\n";
+   
     return false;
 
 }
@@ -159,12 +161,12 @@ int main()
 
     srand(time(0));
 
-    while (option != 5)
+    while (option != 6)
     {
         cout << "Please Select an Option  ! " << "\n\n";
         cout << "1. Create New Account in Sharif Bank (Ltd) " << "\n" << "2. Deposit Money in your Account" << "\n"
-            << "3. Withdrawl Money From Your Account " << "\n" << "4. View Account Information " << "\n"
-            << "5. Exit " << "\n\n";
+            << "3. Withdrawl Money From Your Account " << "\n" << "4. View Account Information " << "\n" 
+            << "5. Manage Pin Code " << "\n" << "6. Exit " << "\n\n";
         option = checkinputtype("Enter the Selected Option > ");
 
         // using if else to use the desired option 
@@ -219,6 +221,7 @@ int main()
         {
             // Validate Pin To Deposit
             pincheck(pin);
+            continue;
 
             deposit = checkinputtype("Enter The Amount To Deposit Into Your Account : Rs. ");
             if (deposit >= 0)
@@ -242,6 +245,7 @@ int main()
         {
             // Validate Pin to Withdraw
             pincheck(pin);
+            continue;
 
             withdrawal = checkinputtype("Enter The Amount To Withdrawal From Your Account : Rs. ");
             if (balance > withdrawal && withdrawal > 0)
@@ -293,11 +297,73 @@ int main()
 
 
         }
-        \
-            // Exit
         else if (option == 5)
         {
-            cout << "Exiting the System. Thank You for Using Sharif Bank (Ltd).\n";
+            long newpin, newoption, usercnic; string username;
+            cout << "\nPlease Select an Option  ! " << "\n\n";
+            cout << "1. Change Pin Code " << "\n" << "2. Reset Pin" << "\n\n";
+            // Validating Input Data Type
+            option = checkinputtype("Enter the Option > ");
+
+            if (option == 1)
+            {
+                pincheck(pin);
+                cout << "Enter Your New Pin > ";
+                cin >> newpin;
+                pin = newpin;
+                cout << "Congratulations ! Your Pin Have Been Changed . \n\n";
+            }
+
+            if (option == 2)
+            {
+                cout << "Please, Enter The Required Details to Reset Pin Code \n";
+                cout << "Enter the Same Details as Filled During Creating a Account \n ";
+                cout << "Enter Your Name > ";
+                cin >> username;
+                // National ID Validation (5-Digit CNIC) with 4 Time Limit
+                usercnic = checkinputtype("Enter Your 5 Digit National Identification Number > ");
+                int tryagain = 4;
+                while ((cnic > 99999 || cnic < 10000) && tryagain > 0)
+                {
+                    cout << "Error! National Identification Number Cannot Exceed or Less Than Five Digits \n";
+                    cout << " Please Enter Again (Limit 4 Times) > ";
+                    cin >> cnic;
+                    tryagain--;
+                }
+
+                if (tryagain == 0 && (cnic > 99999 || cnic < 10000))
+                {
+                    cout << "\n You Failed to Enter Valid National Identification Number, Returning Back to Main Menu \n\n";
+                    continue;
+                }
+
+                // Checking Details
+                if (username == name && usercnic == cnic) {
+                    cout << "\n Congratulations! Please Enter Your New Pin > ";
+                    cin >> newpin;
+                    pin = newpin;
+
+                    // Calling Function to Log Details into the File        
+                    copyvariabledata(name, notfixedacc, cnic, balance, pin);
+                }
+                else {
+                    cout << "\t\t\t\tSorry, The Provided Information Doesn't Match With Records.Try Again! \n\n";
+                   
+                }
+
+
+
+            }
+            else {
+                cout << "\nPlease Choose a Valid Option From 1 and 2 \n\n";
+            }
+
+        }
+
+            // Exit
+        else if (option == 6)
+        {
+            cout << "Exiting the System. Thank You for Using Sharif Bank (Ltd).\n\n";
 
         }
 
@@ -305,7 +371,7 @@ int main()
         else
 
         {
-            cout << "Please Choose a Valid Option From 1-5 \n\n";
+            cout << "Please Choose a Valid Option From 1-6 \n\n";
         }
 
 
