@@ -31,31 +31,22 @@ long checkinputtype(const string& prompt) {
         }
     }
 }
-
+// Validate User Entered Pin
 bool pincheck(long& pin, int tryagain = 4) {
 
     int userpin;
     while (tryagain > 0)
     {
-        userpin = checkinputtype("Please, Enter Your Pin (Try Again Limit = 4)> ");
-
-
-        if (userpin > 9999 || userpin < 1000) {
-            cout << " Error! PIN must be a 4-digit number.\n";
-            tryagain--;
-            continue;
-
-        }
+        userpin = checkinputtype("Please, Enter Your Pin (Try Again Limit = 4) > ");
 
         if (userpin == pin) {
+            cout << "PIN verified successfully!\n";
             return true;
         }
         else {
-            cout << "Incorrect PIN. Please try again.\n";
+            cout << "Sorry, The Entered Pin is Incorrect.Try Again \n";
             tryagain--;
         }
-
-
 
     }
     cout << "\n You Failed to Enter Valid Pin, Returning Back to Main Menu \n\n";
@@ -110,7 +101,7 @@ void depositamount(long deposit, long balance) {
 }
 
 // Function to Save Data and Copy After Exiting System
-void copyvariabledata(const string& name, long notfixedacc, long cnic, long balance) {
+void copyvariabledata(const string& name, long notfixedacc, long cnic, long balance, long pin) {
 
     ofstream data("data.txt", ios::trunc);
     if (data.is_open())
@@ -119,6 +110,7 @@ void copyvariabledata(const string& name, long notfixedacc, long cnic, long bala
         data << notfixedacc << endl;
         data << cnic << endl;
         data << balance << endl;
+        data << pin << endl;
         data.close();
     }
     else
@@ -129,10 +121,10 @@ void copyvariabledata(const string& name, long notfixedacc, long cnic, long bala
 }
 
 // Function to Recall Data
-bool loadvariableinfo(string& name, long& notfixedacc, long& cnic, long& balance) {
+bool loadvariableinfo(string& name, long& notfixedacc, long& cnic, long& balance, long& pin) {
     ifstream data("data.txt");
     if (data.is_open()) {
-        if (data >> name >> notfixedacc >> cnic >> balance) {
+        if (data >> name >> notfixedacc >> cnic >> balance >> pin) {
             data.close();
             return true;
         }
@@ -158,7 +150,7 @@ int main()
     cout << endl;
 
     // Load existing account data if available
-    if (loadvariableinfo(name, notfixedacc, cnic, balance)) {
+    if (loadvariableinfo(name, notfixedacc, cnic, balance,pin)) {
         cout << "Welcome Back, " << name << "! Your Account Information has been Loaded.\n\n";
     }
     else {
@@ -210,39 +202,23 @@ int main()
             notfixedacc = rand() % 900000 + 100000;
 
             // Create a Pin
-            pin = checkinputtype("Enter Your 4 Digits Pin Code > ");
-            int tryy = 4;
-            while (pin > 9999 || pin < 1000 && tryy > 0) {
-                cout << "Error ! Please Input a 4 Digit Pin \n";
-                cout << "Please Enter Again (Limit 4 Times) > ";
-                cin >> pin;
-                tryy--;
-            }
-            if (tryagain == 0 && (pin > 9999 || cnic < 1000))
-            {
-                cout << "\n You Failed to Enter Valid Pin Code, Returning Back to Main Menu \n\n";
-                continue;
-            }
+            pin = checkinputtype("Enter Your Pin Code > ");
+
             // Account Created Successfully
             cout << "Congratulations " << name << "! You Have Successfully Created Account With Account Number "
                 << fixedaccnbr << notfixedacc << " Against Identification Number " << cnic << "\n\n";
 
             // Calling Function to Log Details into the File        
             savetransactiondetails(name, notfixedacc, cnic, balance);
-            copyvariabledata(name, notfixedacc, cnic, balance);
+            copyvariabledata(name, notfixedacc, cnic, balance,pin);
 
         }
 
         // Depositing Money
         else if (option == 2)
         {
-            if (pincheck(pin)) {
-                cout << "PIN verified successfully!\n";
-            }
-            else {
-                cout << "Failed to verify PIN.\n";
-            }
-
+            // Validate Pin To Deposit
+            pincheck(pin);
 
             deposit = checkinputtype("Enter The Amount To Deposit Into Your Account : Rs. ");
             if (deposit >= 0)
@@ -258,19 +234,15 @@ int main()
 
             // Calling Function to Log Details into the File        
             depositamount(deposit, balance);
-            copyvariabledata(name, notfixedacc, cnic, balance);
+            copyvariabledata(name, notfixedacc, cnic, balance,pin);
         }
 
         // Withdrawal Money
         else if (option == 3)
         {
             // Validate Pin to Withdraw
-            if (pincheck(pin)) {
-                cout << "PIN verified successfully!\n";
-            }
-            else {
-                cout << "Failed to verify PIN.\n";
-            }
+            pincheck(pin);
+
             withdrawal = checkinputtype("Enter The Amount To Withdrawal From Your Account : Rs. ");
             if (balance > withdrawal && withdrawal > 0)
             {
@@ -280,7 +252,7 @@ int main()
 
                 // Calling Function to Log Details into the File        
                 withdrwawalamount(withdrawal, balance);
-                copyvariabledata(name, notfixedacc, cnic, balance);
+                copyvariabledata(name, notfixedacc, cnic, balance,pin);
             }
 
             else if (balance < withdrawal)
@@ -297,14 +269,8 @@ int main()
         // Account Information
         else if (option == 4)
         {
-            // Validate Pin To Process
-            if (pincheck(pin)) {
-                cout << "PIN verified successfully!\n";
-            }
-            else {
-                cout << "Failed to verify PIN.\n";
+            pincheck(pin);
 
-            }
             cout << "\t\t\t\t Account Information \n";
             cout << "Account Holder Name : " << name << "\n";
             cout << "Account Number: " << fixedaccnbr << notfixedacc << "\n";
@@ -346,5 +312,3 @@ int main()
     }
 
 }
-
-
