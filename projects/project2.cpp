@@ -73,7 +73,7 @@ void savetransactiondetails(const string& name, double cnic, double notfixedacc,
 
 
 // Function to Save Withdrawal Transactions History
-void withdrwawalamount(double withdrawal, double balance) {
+void withdrawamount(double withdrawal, double balance) {
     ofstream recenttrans("Recent Transactions.txt", ios::app);
     // Check if the file opened successfully
     if (recenttrans.is_open())
@@ -253,7 +253,7 @@ int main()
                     cout << "Your New Balance is  Rs. " << balance << "\n\n";
 
                     // Calling Function to Log Details into the File        
-                    withdrwawalamount(withdrawal, balance);
+                    withdrawamount(withdrawal, balance);
                     copyvariabledata(name, notfixedacc, cnic, balance, pin);
                 }
                 else if (balance < withdrawal)
@@ -327,15 +327,15 @@ int main()
                 // National ID Validation (5-Digit CNIC) with 4 Time Limit
                 usercnic = checkinputtype("Enter Your 5 Digit National Identification Number > ");
                 int tryagain = 4;
-                while ((cnic > 99999 || cnic < 10000) && tryagain > 0)
+                while ((usercnic > 99999 || usercnic < 10000) && tryagain > 0)
                 {
                     cout << "Error! National Identification Number Cannot Exceed or Less Than Five Digits and Must Be Greater Than 9999 \n";
                     cout << " Please Enter Again (Limit 4 Times) : ";
-                    cin >> cnic;
+                    cin >> usercnic;
                     tryagain--;
                 }
 
-                if (tryagain == 0 && (cnic > 99999 || cnic < 10000))
+                if (tryagain == 0 && (usercnic > 99999 || usercnic < 10000))
                 {
                     cout << "\n You Failed to Enter Valid National Identification Number, Returning Back to Main Menu. \n\n";
                     continue;
@@ -350,7 +350,7 @@ int main()
                     // Calling Function to Log Details into the File        
                     copyvariabledata(name, notfixedacc, cnic, balance, pin);
                 }
-                else {
+                else if (newoption !=0 && newoption!=1){
                     cout << "\t\t\t\tSorry, The Provided Information Doesn't Match With Records.Try Again! \n\n";
 
                 }
