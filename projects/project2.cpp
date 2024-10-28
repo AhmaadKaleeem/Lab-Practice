@@ -14,8 +14,8 @@ Display Account Information : Shows account number, balance, and recent transact
 using namespace std;
 
 // Function to Validate Respective Input Data Type
-long checkinputtype(const string& prompt) {
-    long input;
+double checkinputtype(const string& prompt) {
+    double input;
     while (true) {
         cout << prompt;
         cin >> input;
@@ -32,7 +32,7 @@ long checkinputtype(const string& prompt) {
     }
 }
 // Validate User Entered Pin
-bool pincheck(long& pin, int tryagain = 4) {
+bool pincheck(double& pin, int tryagain = 4) {
 
     int userpin;
     while (tryagain > 0)
@@ -56,7 +56,7 @@ bool pincheck(long& pin, int tryagain = 4) {
 }
 
 // Function to Save All Transactions History
-void savetransactiondetails(const string& name, long cnic, long notfixedacc, long balance) {
+void savetransactiondetails(const string& name, double cnic, double notfixedacc, double balance) {
     ofstream recenttrans("Recent Transactions.txt", ios::app);
     // Check if the file opened successfully
     if (recenttrans.is_open())
@@ -72,7 +72,7 @@ void savetransactiondetails(const string& name, long cnic, long notfixedacc, lon
 
 
 // Function to Save Withdrawal Transactions History
-void withdrwawalamount(long withdrawal, long balance) {
+void withdrwawalamount(double withdrawal, double balance) {
     ofstream recenttrans("Recent Transactions.txt", ios::app);
     // Check if the file opened successfully
     if (recenttrans.is_open())
@@ -87,7 +87,7 @@ void withdrwawalamount(long withdrawal, long balance) {
 }
 
 // Function to Save Deposit Transactions History
-void depositamount(long deposit, long balance) {
+void depositamount(double deposit, double balance) {
     ofstream recenttrans("Recent Transactions.txt", ios::app);
     // Check if the file opened successfully
     if (recenttrans.is_open())
@@ -102,7 +102,7 @@ void depositamount(long deposit, long balance) {
 }
 
 // Function to Save Data and Copy After Exiting System
-void copyvariabledata(const string& name, long notfixedacc, long cnic, long balance, long pin) {
+void copyvariabledata(const string& name, double notfixedacc, double cnic, double balance, double pin) {
 
     ofstream data("data.txt", ios::trunc);
     if (data.is_open())
@@ -122,7 +122,7 @@ void copyvariabledata(const string& name, long notfixedacc, long cnic, long bala
 }
 
 // Function to Recall Data
-bool loadvariableinfo(string& name, long& notfixedacc, long& cnic, long& balance, long& pin) {
+bool loadvariableinfo(string& name, double& notfixedacc, double& cnic, double& balance, double& pin) {
     ifstream data("data.txt");
     if (data.is_open()) {
         if (data >> name >> notfixedacc >> cnic >> balance >> pin) {
@@ -141,7 +141,7 @@ int main()
 {
     // Declaring Variables
    // For making a fixed account number before 
-    long  pin = 0, deposit = 0, balance = 0, withdrawal = 0, option = 0, cnic = 0, notfixedacc = 0;
+    double  pin = 0, deposit = 0, balance = 0, withdrawal = 0, option = 0, cnic = 0, notfixedacc = 0;
     string name, fixedaccnbr = "05101324";
     ofstream recenttrans;
 
@@ -300,7 +300,7 @@ int main()
         }
         else if (option == 5)
         {
-            long newpin, newoption, usercnic; string username;
+            double newpin, newoption, usercnic; string username;
             cout << "\nPlease Select an Option  ! " << "\n\n";
             cout << "1. Change Pin Code " << "\n" << "2. Reset Pin" << "\n\n";
             // Validating Input Data Type
