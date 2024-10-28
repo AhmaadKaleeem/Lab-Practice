@@ -1,9 +1,10 @@
 // Project: Bank Account Management System
 /* Features:
-Create an Account : User enters their details,deposit and gets a new account number.
+Create an Account : User enters their details,deposit,create pin and gets a new account number.
 Deposit Money : User can deposit money into their account.
 Withdraw Money : User can withdraw money, but only if the balance allows.
-Display Account Information : Shows account number, balance, and recent transactions. */
+Display Account Information : Shows account number, balance, and recent transactions.
+Modify Pin : Can Change or Reset Pin Code */
 
 #include <iostream>
 #include <fstream> // For File Handling
@@ -23,7 +24,7 @@ double checkinputtype(const string& prompt) {
         if (cin.fail()) {
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            cout << "\t\t\t\tInvalid input. Please Enter an Integer.\n\n";
+            cout << "\n\t\t\t\tInvalid input.Please Enter an Integer.\n\n";
         }
         else {
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -37,20 +38,20 @@ bool pincheck(double& pin, int tryagain = 4) {
     int userpin;
     while (tryagain > 0)
     {
-        userpin = checkinputtype("Please, Enter Your Pin (Try Again Limit = 4) > ");
+        userpin = checkinputtype("\nPlease,Enter Your Pin (Try Again Limit = 4) : ");
 
         if (userpin == pin) {
-            cout << "PIN verified successfully!\n";
+            cout << "PIN verified successfully! \n";
             return true;
         }
         else {
-            cout << "Sorry, The Entered Pin is Incorrect.Try Again \n";
+            cout << "Sorry,The Entered Pin is Incorrect.Try Again! \n";
 
             tryagain--;
         }
 
     }
-    cout << "\n You Failed to Enter Valid Pin, Returning Back to Main Menu \n\n";
+    cout << "\nYou Failed to Enter Valid Pin, Returning Back to Main Menu. \n\n";
     return false;
 
 }
@@ -138,9 +139,8 @@ bool loadvariableinfo(string& name, double& notfixedacc, double& cnic, double& b
 }
 
 int main()
-{
+{    
     // Declaring Variables
-   // For making a fixed account number before 
     double  pin = 0, deposit = 0, balance = 0, withdrawal = 0, option = 0, cnic = 0, notfixedacc = 0;
     string name, fixedaccnbr = "05101324";
     ofstream recenttrans;
@@ -153,25 +153,24 @@ int main()
 
     // Load existing account data if available
     if (loadvariableinfo(name, notfixedacc, cnic, balance, pin)) {
-        cout << "Welcome Back, " << name << "! Your Account Information has been Loaded.\n\n";
+        cout << "\t\t\tWelcome Back " << name << ", Your Account Information has been Loaded.\n\n";
     }
     else {
-        cout << "No Previous Account Data found. Please create a New Account.\n";
+        cout << "No Previous Account Data found.Please create a New Account.\n";
     }
 
-    srand(time(0));
+    srand(time(0)); // To Create DIfferent Randon Number Each Time
 
     while (option != 6)
     {
-        cout << "Please Select an Option  ! " << "\n\n";
+        cout << "Please Select an Option  ! \n\n";
         cout << "1. Create New Account in Sharif Bank (Ltd) " << "\n" << "2. Deposit Money in your Account" << "\n"
             << "3. Withdrawl Money From Your Account " << "\n" << "4. View Account Information " << "\n"
             << "5. Manage Pin Code " << "\n" << "6. Exit " << "\n\n";
-        option = checkinputtype("Enter the Selected Option > ");
+        option = checkinputtype("Enter the Selected Option : ");
 
-        // using if else to use the desired option 
+       
         // Creating Account
-        // using if else to use the desired option
         if (option == 1)
         {
             // Clear previous transactions 
@@ -179,36 +178,36 @@ int main()
             recenttrans.close();
 
             cout << "\t\t\t\t""Welcome to Sharif Bank (Ltd) " << "\n";
-            cout << "Enter Your Name (Use Special Characters Instead Of Space > ";
+            cout << "Enter Your Name (Use Special Characters Instead Of Space) : ";
             cin >> name;
 
             // National ID Validation (5-Digit CNIC) with 4 Time Limit
-            cnic = checkinputtype("Enter Your 5 Digit National Identification Number > ");
+            cnic = checkinputtype("Enter Your 5 Digit National Identification Number : ");
             int tryagain = 4;
             while ((cnic > 99999 || cnic < 10000) && tryagain > 0)
             {
-                cout << "Error! National Identification Number Cannot Exceed or Less Than Five Digits \n";
-                cout << " Please Enter Again (Limit 4 Times) > ";
+                cout << "Error! National Identification Number Cannot Exceed or Less Than Five Digits and Must Be Greater Than 99999 \n";
+                cout << " Please Enter Again (Limit 4 Times) : ";
                 cin >> cnic;
                 tryagain--;
             }
             if (tryagain == 0 && (cnic > 99999 || cnic < 10000))
             {
-                cout << "\n You Failed to Enter Valid National Identification Number, Returning Back to Main Menu \n\n";
+                cout << "\n You Failed to Enter Valid National Identification Number, Returning Back to Main Menu. \n\n";
                 continue;
             }
 
-            balance = checkinputtype("Enter Your Intial Deposit > Rs.");
+            balance = checkinputtype("Enter Your Intial Deposit : Rs.");
 
             // Generating Radnom Account Number
             notfixedacc = rand() % 900000 + 100000;
 
             // Create a Pin
-            pin = checkinputtype("Create Your Pin Code > ");
+            pin = checkinputtype("Enter to Create Your Pin Code : ");
 
             // Account Created Successfully
             cout << "Congratulations " << name << "! You Have Successfully Created Account With Account Number "
-                << fixedaccnbr << notfixedacc << " Against Identification Number " << cnic << "\n\n";
+                << "\n" << fixedaccnbr << notfixedacc << " Against Identification Number " << cnic << ". \n\n";
 
             // Calling Function to Log Details into the File        
             savetransactiondetails(name, notfixedacc, cnic, balance);
@@ -226,7 +225,7 @@ int main()
                 if (deposit >= 0)
                 {
                     balance = balance + deposit;
-                    cout << "Your Transaction is Successfully Completed ! " << "\n";
+                    cout << "Your Transaction is Successfully Completed. " << "\n";
                     cout << "Your New Balance is  Rs. " << balance << "\n\n";
                     // Calling Function to Log Details into the File        
                     depositamount(deposit, balance);
@@ -234,10 +233,10 @@ int main()
                 }
                 else
                 {
-                    cout << "Please ! Enter Amount in Positive Value \n\n";
+                    cout << "Please! Enter Amount in Positive Value \n\n";
                 }
             }
-            
+
         }
 
         // Withdrawal Money
@@ -250,7 +249,7 @@ int main()
                 if (balance > withdrawal && withdrawal > 0)
                 {
                     balance = balance - withdrawal;
-                    cout << "Your Transaction is Successfully Completed ! " << "\n";
+                    cout << "Your Transaction is Successfully Completed. " << "\n";
                     cout << "Your New Balance is  Rs. " << balance << "\n\n";
 
                     // Calling Function to Log Details into the File        
@@ -267,7 +266,7 @@ int main()
                 }
             }
 
-            
+
 
         }
 
@@ -298,51 +297,53 @@ int main()
 
 
         }
+
+        // Modify Pin Code
         else if (option == 5)
         {
             double newpin, newoption, usercnic; string username;
             cout << "\nPlease Select an Option  ! " << "\n\n";
             cout << "1. Change Pin Code " << "\n" << "2. Reset Pin" << "\n\n";
             // Validating Input Data Type
-            newoption = checkinputtype("Enter the Option > ");
+            newoption = checkinputtype("Enter the Option : ");
 
             if (newoption == 1)
             {
                 if (pincheck(pin)) {
-                    cout << "Enter Your New Pin > ";
+                    cout << "Enter Your New Pin : ";
                     cin >> newpin;
                     pin = newpin;
-                    cout << "Congratulations ! Your Pin Have Been Changed . \n\n";
+                    cout << "Congratulations! Your Pin Have Been Changed. \n\n";
                     copyvariabledata(name, notfixedacc, cnic, balance, pin);
                 }
             }
 
             if (newoption == 2)
             {
-                cout << "Please, Enter The Required Details to Reset Pin Code \n";
-                cout << "Enter the Same Details as Filled During Creating a Account \n ";
-                cout << "Enter Your Name > ";
+                cout << "Please, Enter The Required Details to Reset Pin Code. \n";
+                cout << "Enter the Same Details as Filled During Creating a Account. \n ";
+                cout << "Enter Your Name : ";
                 cin >> username;
                 // National ID Validation (5-Digit CNIC) with 4 Time Limit
                 usercnic = checkinputtype("Enter Your 5 Digit National Identification Number > ");
                 int tryagain = 4;
                 while ((cnic > 99999 || cnic < 10000) && tryagain > 0)
                 {
-                    cout << "Error! National Identification Number Cannot Exceed or Less Than Five Digits \n";
-                    cout << " Please Enter Again (Limit 4 Times) > ";
+                    cout << "Error! National Identification Number Cannot Exceed or Less Than Five Digits and Must Be Greater Than 9999 \n";
+                    cout << " Please Enter Again (Limit 4 Times) : ";
                     cin >> cnic;
                     tryagain--;
                 }
 
                 if (tryagain == 0 && (cnic > 99999 || cnic < 10000))
                 {
-                    cout << "\n You Failed to Enter Valid National Identification Number, Returning Back to Main Menu \n\n";
+                    cout << "\n You Failed to Enter Valid National Identification Number, Returning Back to Main Menu. \n\n";
                     continue;
                 }
 
                 // Checking Details
                 if (username == name && usercnic == cnic) {
-                    cout << "\n Congratulations! Please Enter Your New Pin > ";
+                    cout << "\n Congratulations! Please Enter Your New Pin : ";
                     cin >> newpin;
                     pin = newpin;
 
