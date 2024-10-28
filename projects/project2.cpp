@@ -9,7 +9,7 @@ Display Account Information : Shows account number, balance, and recent transact
 #include <fstream> // For File Handling
 #include <string>
 #include <ctime> 
-# include <stdlib.h> // Create Random Numbers
+#include <stdlib.h> // Create Random Numbers
 #include <limits> // To Handle Wrong Data Type Input
 using namespace std;
 
@@ -141,7 +141,7 @@ int main()
 {
     // Declaring Variables
    // For making a fixed account number before 
-    long  pin = 0, deposit = 0, balance = 0,  withdrawal = 0, option = 0, cnic = 0, notfixedacc = 0;
+    long  pin = 0, deposit = 0, balance = 0, withdrawal = 0, option = 0, cnic = 0, notfixedacc = 0;
     string name, fixedaccnbr = "05101324";
     ofstream recenttrans;
 
@@ -180,7 +180,7 @@ int main()
 
             cout << "\t\t\t\t""Welcome to Sharif Bank (Ltd) " << "\n";
             cout << "Enter Your Name (Use Special Characters Instead Of Space > ";
-            cin >>  name;
+            cin >> name;
 
             // National ID Validation (5-Digit CNIC) with 4 Time Limit
             cnic = checkinputtype("Enter Your 5 Digit National Identification Number > ");
@@ -204,7 +204,7 @@ int main()
             notfixedacc = rand() % 900000 + 100000;
 
             // Create a Pin
-            pin = checkinputtype("Enter Your Pin Code > ");
+            pin = checkinputtype("Create Your Pin Code > ");
 
             // Account Created Successfully
             cout << "Congratulations " << name << "! You Have Successfully Created Account With Account Number "
@@ -228,17 +228,16 @@ int main()
                     balance = balance + deposit;
                     cout << "Your Transaction is Successfully Completed ! " << "\n";
                     cout << "Your New Balance is  Rs. " << balance << "\n\n";
+                    // Calling Function to Log Details into the File        
+                    depositamount(deposit, balance);
+                    copyvariabledata(name, notfixedacc, cnic, balance, pin);
+                }
+                else
+                {
+                    cout << "Please ! Enter Amount in Positive Value \n\n";
                 }
             }
-
-            else
-            {
-                cout << "Please ! Enter Amount in Positive Value \n\n";
-            }
-
-            // Calling Function to Log Details into the File        
-            depositamount(deposit, balance);
-            copyvariabledata(name, notfixedacc, cnic, balance, pin);
+            
         }
 
         // Withdrawal Money
@@ -258,16 +257,17 @@ int main()
                     withdrwawalamount(withdrawal, balance);
                     copyvariabledata(name, notfixedacc, cnic, balance, pin);
                 }
+                else if (balance < withdrawal)
+                {
+                    cout << "Sorry! Your Account Doesn't Have Sufficient Balance. ";
+                }
+                else
+                {
+                    cout << "Invalid Amount. Please Enter a Positive Value.\n\n";
+                }
             }
 
-            else if (balance < withdrawal)
-            {
-                cout << "Sorry! Your Account Doesn't Have Sufficient Balance. ";
-            }
-            else
-            {
-                cout << "Invalid Amount. Please Enter a Positive Value.\n\n";
-            }
+            
 
         }
 
@@ -308,11 +308,12 @@ int main()
 
             if (newoption == 1)
             {
-                if (pincheck(pin)){
-                cout << "Enter Your New Pin > ";
-                cin >> newpin;
-                pin = newpin;
-                cout << "Congratulations ! Your Pin Have Been Changed . \n\n";
+                if (pincheck(pin)) {
+                    cout << "Enter Your New Pin > ";
+                    cin >> newpin;
+                    pin = newpin;
+                    cout << "Congratulations ! Your Pin Have Been Changed . \n\n";
+                    copyvariabledata(name, notfixedacc, cnic, balance, pin);
                 }
             }
 
@@ -321,7 +322,7 @@ int main()
                 cout << "Please, Enter The Required Details to Reset Pin Code \n";
                 cout << "Enter the Same Details as Filled During Creating a Account \n ";
                 cout << "Enter Your Name > ";
-                cin >>username;
+                cin >> username;
                 // National ID Validation (5-Digit CNIC) with 4 Time Limit
                 usercnic = checkinputtype("Enter Your 5 Digit National Identification Number > ");
                 int tryagain = 4;
