@@ -1,23 +1,26 @@
-// fabonacci.cpp
-
 #include <iostream>
-#include <algorithm>
-using namespace  std;
-void palindrome(string a) {
-    string  reversed = a;
-  reverse(a.begin(), a.end());
-  if (reversed == a) {
-      cout << "It is a Palindrome"; 
-  }
-  else {
-      cout << "It is not a Palindrome";
-  }
+using namespace std;
+
+void palindrome(string str) {
+    string reversed = "";
+
+    // Reverse the string manually
+    for (int i = str.length() - 1; i >= 0; i--) {
+        reversed += str[i];
+    }
+
+    // Compare the original and reversed strings
+    if (str == reversed) {
+        cout << "It is a Palindrome";
+    }
+    else {
+        cout << "It is not a Palindrome";
+    }
 }
-int main()
-{
+
+int main() {
     string input;
-    cout << "Enter a sentence to check : ";
-  cin>> input;
+    cout << "Enter a string to check: ";
+    cin >> input;
     palindrome(input);
 }
-
