@@ -1,6 +1,4 @@
-// Problem 1: Password Verification
-// Problem: Keep asking the user to enter a password until they enter the correct one ("pass123").
-//
+
 #include <iostream>
 using namespace std;
 
