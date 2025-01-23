@@ -82,6 +82,13 @@ void displaydata(string newdata)
   }
 }
 
+void searchemployee(int& employeeid, string&name ,  string& department , int& salary)
+{
+  int id;
+cout << "Please Enter Employee ID : ";
+cin >> id;
+
+}
 int main() {
 string name,department,data;
 int employeeid,salary,choice;
@@ -101,6 +108,10 @@ newdata(name,employeeid,department,salary);
 else if(choice==2)
 {
   displaydata(data);
+}
+else if (choice==3)
+{
+
 }
 
 }

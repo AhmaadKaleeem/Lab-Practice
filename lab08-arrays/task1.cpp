@@ -1,4 +1,4 @@
-#include <iostream>
+/* #include <iostream>
 using namespace std;
 
 int main() {
@@ -11,4 +11,17 @@ int main() {
     cout << endl;
 
     return 0;
+
+}
+*/
+#include <iostream>
+using namespace std;
+
+int main(){
+int array [10] = {52,44,54,5,4,56,74,7475,55,55} ;
+for (int i = 0 ; i<=9 ;i--)
+{
+    cout << array[i] <<endl;
+    // 1
+}
 }
