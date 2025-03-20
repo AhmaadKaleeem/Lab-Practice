@@ -18,6 +18,924 @@ PUBG UC : User which are Pubg Lover can buy Uc through Bank. */
 #include <limits> // To Handle Wrong Data Type Input
 using namespace std;
 
+// Function to Load and Bundle Interface
+void loadinterface(bool (*validatefunction)(), void (*function2)(string, double, double&),double& balance,string cnic){
+    if(!validatefunction()){
+        return;
+    };
+    double loadamount;
+                    cout << "Enter the Amount to Load : ";
+                    cin >> loadamount;
+                    if (loadamount > 0 && loadamount <= balance)
+                    {
+                        balance = balance - loadamount;
+                        cout << "Your Transaction is Successfully Completed. " << "\n";
+                        cout << "Your New Balance is  Rs. " << balance << "\n\n";
+                        function2(cnic, loadamount, balance);
+                    }
+                    else if (loadamount > balance)
+                    {
+                        cout << "Sorry! Your Account Doesn't Have Sufficient Balance. ";
+                    }
+                    else
+                    {
+                        cout << "Invalid Amount. Please Enter a Positive Value.\n\n";
+                    }
+}
+// Function To Validate Number for Load and Bundles
+bool valiate_jazznbr(){
+    string number;
+    cout << "Please Enter the Number : ";
+                    getline(cin,number);
+    if (number.length() != 11){
+        cout << "Please Enter a Valid Number ! " << endl;
+        return false;
+    }
+    for (int i = 0; i < 11; i++){
+        if (number[i] < '0' || number[i] > '9' ){
+            cout << "Please Enter a Valid Number ! " << endl;
+            return false;;
+        if (number[0] != 0 || number[1] != 3 || number[2] != 0  || number[2] != 2){
+            cout << "Please Enter a Valid Jazz Number ! " << endl;
+            return false;;
+        }
+        }
+    }
+    return true;
+   }
+bool valiate_telenornbr(){
+    string number;
+    cout << "Please Enter the Number : ";
+                    getline(cin,number);
+    if (number.length() != 11){
+        cout << "Please Enter a Valid Number ! " << endl;
+        return false;
+    }
+    for (int i = 0; i < 11; i++){
+        if (number[i] < '0' || number[i] > '9' ){
+            cout << "Please Enter a Valid Number ! " << endl;
+            return false;;
+        if (number[0] != 0 || number[1] != 3 || number[2] != 4  ){
+            cout << "Please Enter a Valid Telenor Number ! " << endl;
+            return false;;
+        }
+        }
+    }
+    return true;
+   }
+bool valiate_zongnbr(){
+    string number;
+    cout << "Please Enter the Number : ";
+                    getline(cin,number);
+    if (number.length() != 11){
+        cout << "Please Enter a Valid Number ! " << endl;
+        return false;
+    }
+    for (int i = 0; i < 11; i++){
+        if (number[i] < '0' || number[i] > '9' ){
+            cout << "Please Enter a Valid Number ! " << endl;
+            return false;;
+        if (number[0] != 0 || number[1] != 3 || number[2] != 1  ){
+            cout << "Please Enter a Valid Jazz Number ! " << endl;
+            return false;;
+        }
+        }
+    }
+    return true;
+   }
+bool valiate_ufonenbr(){
+    string number;
+    cout << "Please Enter the Number : ";
+                    getline(cin,number);
+    if (number.length() != 11){
+        cout << "Please Enter a Valid Number ! " << endl;
+        return false;
+    }
+    for (int i = 0; i < 11; i++){
+        if (number[i] < '0' || number[i] > '9' ){
+            cout << "Please Enter a Valid Number ! " << endl;
+            return false;;
+        if (number[0] != 0 || number[1] != 3 || number[2] != 3  ){
+            cout << "Please Enter a Valid Jazz Number ! " << endl;
+            return false;;
+        }
+        }
+    }
+    return true;
+   }
+// All Operators Bundles
+void jazzbundles(bool (*function)(),void (*function2)(string,double,double&),double& balance,string cnic){
+    int option;
+    cout << "Welcome to Jazz Bundles and Offers" << "\n\n";
+    cout << "1. Daily Social – 1 Day, 1 GB Social Mbs, 100 Jazz Min, 100 SMS" << "\n";
+    cout << "2. Daily Super – 1 Day, 2 GB, 200 Jazz Min, 200 SMS" << "\n";
+    cout << "3. Daily YouTube – 1 Day, 2 GB, No Calls, No SMS" << "\n";
+    cout << "4. Daily Mega – 1 Day, 1 GB, No Calls, No SMS" << "\n";
+    cout << "5. Weekly Mega – 7 Days, 5 GB, 500 Jazz Min, 500 SMS" << "\n";
+    cout << "6. Weekly Super Plus – 7 Days, 30 GB, 1000 Jazz Min, 1000 SMS" << "\n";
+    cout << "7. Weekly Extreme – 7 Days, 10 GB (Night Only), No Calls, No SMS" << "\n";
+    cout << "8. Monthly Supreme – 30 Days, 20 GB, 5000 Jazz Min, 5000 SMS" << "\n";
+    cout << "9. Monthly Hybrid – 30 Days, 12 GB, 1000 Jazz Min, 1000 SMS" << "\n";
+    cout << "10. Monthly YouTube – 30 Days, 10 GB, No Calls, No SMS" << "\n";
+    cout << "11. Monthly Extreme – 30 Days, 20 GB, No Calls, No SMS" << "\n";
+    cout << "12. Daily Student Package – 1 Day, 2 GB, No Calls, No SMS" << "\n";
+    cout << "13. Weekly Premium – 7 Days, 15 GB, No Calls, No SMS" << "\n";
+    cout << "14. Monthly Supreme Plus – 30 Days, 45 GB, 10000 Jazz Min, 10000 SMS" << "\n";
+    cout << "15. Monthly YouTube Plus – 30 Days, 15 GB, No Calls, No SMS" << "\n";
+    cout << "16. Daily Extreme – 1 Day, 2 GB (Midnight Offer), No Calls, No SMS" << "\n";
+    cout << "Enter the Selected Bundle : ";
+    cin >> option;
+   // Using Array For More Readability 
+   double loadamount;
+    string bundlename[16] = {"Daily Social","Daily Super","Daily YouTube","Daily Mega","Weekly Mega","Weekly Super Plus","Weekly Extreme","Monthly Supreme","Monthly Hybrid","Monthly YouTube","Monthly Extreme","Daily Student Package","Weekly Premium","Monthly Supreme Plus","Monthly YouTube Plus","Daily Extreme"};
+    double prices[16] = {30,35,27,25,400,600,250,1300,1000,600,1500,50,450,2000,700,40};
+    switch (option)
+    {
+case 1:
+    cout << "You Have Selected " << bundlename[0] << " Bundle. The Price is Rs. " << prices[0] << "\n";
+    if (function());
+    
+        balance = balance - prices[0];
+        loadamount = prices[0];
+        cout << "Your Transaction is Successfully Completed. " << "\n";
+        cout << "Your New Balance is  Rs. " << balance << "\n\n";
+        function2(cnic, loadamount, balance);
+    
+    break;
+case 2:
+    cout << "You Have Selected " << bundlename[1] << " Bundle. The Price is Rs. " << prices[1] << "\n";
+    if (function())
+    {
+        balance = balance - prices[1];
+        loadamount = prices[1];
+        cout << "Your Transaction is Successfully Completed. " << "\n";
+        cout << "Your New Balance is  Rs. " << balance << "\n\n";
+        function2(cnic, loadamount, balance);
+    }
+    break;
+case 3: 
+    cout << "You Have Selected " << bundlename[2] << " Bundle. The Price is Rs. " << prices[2] << "\n";
+    if (function())
+    {
+        balance = balance - prices[2];
+        loadamount = prices[2];
+        cout << "Your Transaction is Successfully Completed. " << "\n";
+        cout << "Your New Balance is  Rs. " << balance << "\n\n";
+        function2(cnic, loadamount, balance);
+    }   
+    break;
+case 4:
+    cout << "You Have Selected " << bundlename[3] << " Bundle. The Price is Rs. " << prices[3] << "\n";
+    if (function())
+    {
+        balance = balance - prices[3];
+        loadamount = prices[3];
+        cout << "Your Transaction is Successfully Completed. " << "\n";
+        cout << "Your New Balance is  Rs. " << balance << "\n\n";
+        function2(cnic, loadamount, balance);
+    }
+    break;
+case 5: 
+    cout << "You Have Selected " << bundlename[4] << " Bundle. The Price is Rs. " << prices[4] << "\n";
+    if (function())
+    {
+        balance = balance - prices[4];
+        loadamount = prices[4];   
+        cout << "Your Transaction is Successfully Completed. " << "\n";
+        cout << "Your New Balance is  Rs. " << balance << "\n\n";
+        function2(cnic, loadamount, balance);
+    }
+    break;
+case 6:
+    cout << "You Have Selected " << bundlename[5] << " Bundle. The Price is Rs. " << prices[5] << "\n";
+    if (function())
+    {
+        balance = balance - prices[5];
+        loadamount = prices[5];
+        cout << "Your Transaction is Successfully Completed. " << "\n";
+        cout << "Your New Balance is  Rs. " << balance << "\n\n";
+        function2(cnic, loadamount, balance);
+    }
+    break;
+case 7:
+    cout << "You Have Selected " << bundlename[6] << " Bundle. The Price is Rs. " << prices[6] << "\n";
+    if (function())
+    {
+        balance = balance - prices[6];
+        loadamount = prices[6];
+        cout << "Your Transaction is Successfully Completed. " << "\n";
+        cout << "Your New Balance is  Rs. " << balance << "\n\n";
+        function2(cnic, loadamount, balance);
+    }
+    break;
+case 8:
+    cout << "You Have Selected " << bundlename[7] << " Bundle. The Price is Rs. " << prices[7] << "\n";
+    if (function())
+    {
+        balance = balance - prices[7];
+        loadamount = prices[7];
+        cout << "Your Transaction is Successfully Completed. " << "\n";
+        cout << "Your New Balance is  Rs. " << balance << "\n\n";
+        function2(cnic, loadamount, balance);
+}
+    break;
+case 9:
+    cout << "You Have Selected " << bundlename[8] << " Bundle. The Price is Rs. " << prices[8] << "\n";
+    if (function())
+    {
+        balance = balance - prices[8];
+        loadamount = prices[8];   
+        cout << "Your Transaction is Successfully Completed. " << "\n";
+        cout << "Your New Balance is  Rs. " << balance << "\n\n";
+        function2(cnic, loadamount, balance);
+    }
+    break;
+case 10:
+    cout << "You Have Selected " << bundlename[9] << " Bundle. The Price is Rs. " << prices[9] << "\n";
+    if (function())
+    {
+        balance = balance - prices[9];
+        loadamount = prices[9];
+        cout << "Your Transaction is Successfully Completed. " << "\n";
+        cout << "Your New Balance is  Rs. " << balance << "\n\n";
+        function2(cnic, loadamount, balance);
+    }
+    break;
+case 11:    
+    cout << "You Have Selected " << bundlename[10] << " Bundle. The Price is Rs. " << prices[10] << "\n";
+    if (function())
+    {
+        balance = balance - prices[10];
+        loadamount = prices[10];
+        cout << "Your Transaction is Successfully Completed. " << "\n";
+        cout << "Your New Balance is  Rs. " << balance << "\n\n";
+        function2(cnic, loadamount, balance);
+    }
+    break;
+case 12:
+    cout << "You Have Selected " << bundlename[11] << " Bundle. The Price is Rs. " << prices[11] << "\n";
+    if (function())
+    {
+        balance = balance - prices[11];
+        loadamount = prices[11];
+        cout << "Your Transaction is Successfully Completed. " << "\n";
+        cout << "Your New Balance is  Rs. " << balance << "\n\n";
+        function2(cnic, loadamount, balance);
+    }
+    break;
+case 13:
+    cout << "You Have Selected " << bundlename[12] << " Bundle. The Price is Rs. " << prices[12] << "\n";
+    if (function())
+    {
+        balance = balance - prices[12];
+        loadamount = prices[12];
+        cout << "Your Transaction is Successfully Completed. " << "\n";
+        cout << "Your New Balance is  Rs. " << balance << "\n\n";
+        function2(cnic, loadamount, balance);
+    }
+    break;
+case 14:
+    cout << "You Have Selected " << bundlename[13] << " Bundle. The Price is Rs. " << prices[13] << "\n";
+    if (function())
+    {
+        balance = balance - prices[13];
+        loadamount = prices[13];
+        cout << "Your Transaction is Successfully Completed. " << "\n";
+        cout << "Your New Balance is  Rs. " << balance << "\n\n";
+        function2(cnic, loadamount, balance);
+    }
+    break;
+case 15:
+    cout << "You Have Selected " << bundlename[14] << " Bundle. The Price is Rs. " << prices[14] << "\n";
+    if (function())
+    {
+        balance = balance - prices[14];
+        loadamount = prices[14];
+        cout << "Your Transaction is Successfully Completed. " << "\n";
+        cout << "Your New Balance is  Rs. " << balance << "\n\n";
+        function2(cnic, loadamount, balance);
+    }
+    break;
+case 16:
+    cout << "You Have Selected " << bundlename[15] << " Bundle. The Price is Rs. " << prices[15] << "\n";
+    if (function())
+    {
+        balance = balance - prices[15];
+        loadamount = prices[15];
+
+        cout << "Your Transaction is Successfully Completed. " << "\n";
+        cout << "Your New Balance is  Rs. " << balance << "\n\n";
+        function2(cnic, loadamount, balance);
+    }
+    break;
+default:
+    cout << "Invalid Selection. Please Enter a Valid Option. \n";
+    break;
+    }
+}
+void telenorbundles(bool (*function)(),void (*function2)(string,double,double&), double& balance,string cnic) {
+    int option;
+    cout << "Welcome to Telenor Bundles and Offers" << "\n\n";
+    cout << "1. Daily Social Pack – 1 Day, 1 GB, 100 Telenor Min, 100 SMS" << "\n";
+    cout << "2. Daily YouTube – 1 Day, 2 GB, No Calls, No SMS" << "\n";
+    cout << "3. Daily Heavy Data – 1 Day, 2.5 GB, No Calls, No SMS" << "\n";
+    cout << "4. Weekly Easy Card – 7 Days, 6 GB, 1000 Telenor Min, 1000 SMS" << "\n";
+    cout << "5. Weekly Mega – 7 Days, 10 GB, 500 Telenor Min, 500 SMS" << "\n";
+    cout << "6. Weekly Extreme – 7 Days, 15 GB (Night Only), No Calls, No SMS" << "\n";
+    cout << "7. Monthly Social – 30 Days, 12 GB, No Calls, No SMS" << "\n";
+    cout << "8. Monthly Heavy – 30 Days, 30 GB, 5000 Telenor Min, 5000 SMS" << "\n";
+    cout << "9. Monthly YouTube – 30 Days, 15 GB, No Calls, No SMS" << "\n";
+    cout << "10. Monthly Supreme – 30 Days, 50 GB, 10,000 Telenor Min, 10,000 SMS" << "\n";
+    cout << "11. Daily Data Max – 1 Day, 3 GB, No Calls, No SMS" << "\n";
+    cout << "12. Weekly Hybrid – 7 Days, 12 GB, 2000 Telenor Min, 2000 SMS" << "\n";
+    cout << "13. Weekly Social Plus – 7 Days, 4 GB, No Calls, No SMS" << "\n";
+    cout << "14. Monthly Extreme – 30 Days, 70 GB (Night Only), No Calls, No SMS" << "\n";
+    cout << "15. Monthly YouTube Plus – 30 Days, 20 GB, No Calls, No SMS" << "\n";
+    cout << "Enter the Selected Bundle: ";
+    cin >> option;
+ double loadamount;
+    // Using Array for Bundles and Prices
+    string bundlename[15] = {
+        "Daily Social Pack", "Daily YouTube", "Daily Heavy Data", "Weekly Easy Card",
+        "Weekly Mega", "Weekly Extreme", "Monthly Social", "Monthly Heavy",
+        "Monthly YouTube", "Monthly Supreme", "Daily Data Max", "Weekly Hybrid",
+        "Weekly Social Plus", "Monthly Extreme", "Monthly YouTube Plus"
+    };
+    double prices[15] = {50, 70, 100, 200, 300, 250, 400, 700, 500, 1000, 120, 350, 150, 800, 600};
+
+    switch (option){
+        case 1:
+            cout << "You Have Selected " << bundlename[0] << " Bundle. The Price is Rs. " << prices[0] << "\n";
+            if (function())
+            {
+                balance = balance - prices[0];
+                loadamount = prices[0];
+                cout << "Your Transaction is Successfully Completed. " << "\n";
+                cout << "Your New Balance is  Rs. " << balance << "\n\n";
+               function2(cnic, loadamount, balance);
+            }
+            break;
+        case 2:
+            cout << "You Have Selected " << bundlename[1] << " Bundle. The Price is Rs. " << prices[1] << "\n";
+            if (function())
+            {
+                balance = balance - prices[1];
+                loadamount = prices[1];
+                cout << "Your Transaction is Successfully Completed. " << "\n";
+                cout << "Your New Balance is  Rs. " << balance << "\n\n";
+               function2(cnic, loadamount, balance);
+            }
+            break;
+        case 3: 
+            cout << "You Have Selected " << bundlename[2] << " Bundle. The Price is Rs. " << prices[2] << "\n";
+            if (function())
+            {
+                balance = balance - prices[2];
+                loadamount = prices[2];
+                cout << "Your Transaction is Successfully Completed. " << "\n";
+                cout << "Your New Balance is  Rs. " << balance << "\n\n";
+               function2(cnic, loadamount, balance);
+            }   
+            break;
+        case 4:
+            cout << "You Have Selected " << bundlename[3] << " Bundle. The Price is Rs. " << prices[3] << "\n";
+            if (function())
+            {
+                balance = balance - prices[3];
+                loadamount = prices[3];
+                cout << "Your Transaction is Successfully Completed. " << "\n";
+                cout << "Your New Balance is  Rs. " << balance << "\n\n";
+               function2(cnic, loadamount, balance);
+            }
+            break;
+        case 5: 
+            cout << "You Have Selected " << bundlename[4] << " Bundle. The Price is Rs. " << prices[4] << "\n";
+            if (function())
+            {
+                balance = balance - prices[4];
+                loadamount = prices[4];   
+                cout << "Your Transaction is Successfully Completed. " << "\n";
+                cout << "Your New Balance is  Rs. " << balance << "\n\n";
+               function2(cnic, loadamount, balance);
+            }
+            break;
+        case 6:
+            cout << "You Have Selected " << bundlename[5] << " Bundle. The Price is Rs. " << prices[5] << "\n";
+            if (function())
+            {
+                balance = balance - prices[5];
+                loadamount = prices[5];
+                cout << "Your Transaction is Successfully Completed. " << "\n";
+                cout << "Your New Balance is  Rs. " << balance << "\n\n";
+               function2(cnic, loadamount, balance);
+            }
+            break;
+        case 7:
+            cout << "You Have Selected " << bundlename[6] << " Bundle. The Price is Rs. " << prices[6] << "\n";
+            if (function())
+            {
+                balance = balance - prices[6];
+                loadamount = prices[6];
+                cout << "Your Transaction is Successfully Completed. " << "\n";
+                cout << "Your New Balance is  Rs. " << balance << "\n\n";
+               function2(cnic, loadamount, balance);
+            }
+            break;
+        case 8:
+            cout << "You Have Selected " << bundlename[7] << " Bundle. The Price is Rs. " << prices[7] << "\n";
+            if (function())
+            {
+                balance = balance - prices[7];
+                loadamount = prices[7];
+                cout << "Your Transaction is Successfully Completed. " << "\n";
+                cout << "Your New Balance is  Rs. " << balance << "\n\n";
+               function2(cnic, loadamount, balance);
+        }
+            break;
+        case 9:
+            cout << "You Have Selected " << bundlename[8] << " Bundle. The Price is Rs. " << prices[8] << "\n";
+            if (function())
+            {
+                balance = balance - prices[8];
+                loadamount = prices[8];   
+                cout << "Your Transaction is Successfully Completed. " << "\n";
+                cout << "Your New Balance is  Rs. " << balance << "\n\n";
+               function2(cnic, loadamount, balance);
+            }
+            break;
+        case 10:
+            cout << "You Have Selected " << bundlename[9] << " Bundle. The Price is Rs. " << prices[9] << "\n";
+            if (function())
+            {
+                balance = balance - prices[9];
+                loadamount = prices[9];
+                cout << "Your Transaction is Successfully Completed. " << "\n";
+                cout << "Your New Balance is  Rs. " << balance << "\n\n";
+               function2(cnic, loadamount, balance);
+            }
+            break;
+        case 11:    
+            cout << "You Have Selected " << bundlename[10] << " Bundle. The Price is Rs. " << prices[10] << "\n";
+            if (function())
+            {
+                balance = balance - prices[10];
+                loadamount = prices[10];
+                cout << "Your Transaction is Successfully Completed. " << "\n";
+                cout << "Your New Balance is  Rs. " << balance << "\n\n";
+               function2(cnic, loadamount, balance);
+            }
+            break;
+        case 12:
+            cout << "You Have Selected " << bundlename[11] << " Bundle. The Price is Rs. " << prices[11] << "\n";
+            if (function())
+            {
+                balance = balance - prices[11];
+                loadamount = prices[11];
+                cout << "Your Transaction is Successfully Completed. " << "\n";
+                cout << "Your New Balance is  Rs. " << balance << "\n\n";
+               function2(cnic, loadamount, balance);
+            }
+            break;
+        case 13:
+            cout << "You Have Selected " << bundlename[12] << " Bundle. The Price is Rs. " << prices[12] << "\n";
+            if (function())
+            {
+                balance = balance - prices[12];
+                loadamount = prices[12];
+                cout << "Your Transaction is Successfully Completed. " << "\n";
+                cout << "Your New Balance is  Rs. " << balance << "\n\n";
+               function2(cnic, loadamount, balance);
+            }
+            break;
+        case 14:
+            cout << "You Have Selected " << bundlename[13] << " Bundle. The Price is Rs. " << prices[13] << "\n";
+            if (function())
+            {
+                balance = balance - prices[13];
+                loadamount = prices[13];
+                cout << "Your Transaction is Successfully Completed. " << "\n";
+                cout << "Your New Balance is  Rs. " << balance << "\n\n";
+               function2(cnic, loadamount, balance);
+            }
+            break;
+        case 15:
+            cout << "You Have Selected " << bundlename[14] << " Bundle. The Price is Rs. " << prices[14] << "\n";
+            if (function())
+            {
+                balance = balance - prices[14];
+                loadamount = prices[14];
+                cout << "Your Transaction is Successfully Completed. " << "\n";
+                cout << "Your New Balance is  Rs. " << balance << "\n\n";
+               function2(cnic, loadamount, balance);
+            }
+            break;
+        default:
+            cout << "Invalid Selection. Please Enter a Valid Option. \n";
+            break;
+            }
+}
+void zongbundles(bool (*function)(),void (*function2)(string,double,double&), double& balance,string cnic) {
+    int option;
+    cout << "Welcome to Zong Bundles and Offers" << "\n\n";
+    cout << "1. Daily Basic – 1 Day, 500 MB, 50 Zong Min, 50 SMS" << "\n";
+    cout << "2. Daily YouTube – 1 Day, 1 GB, No Calls, No SMS" << "\n";
+    cout << "3. Daily Data Max – 1 Day, 2.5 GB, No Calls, No SMS" << "\n";
+    cout << "4. Weekly Super – 7 Days, 4 GB, 700 Zong Min, 700 SMS" << "\n";
+    cout << "5. Weekly Premium – 7 Days, 8 GB, 500 Zong Min, 500 SMS" << "\n";
+    cout << "6. Weekly Extreme – 7 Days, 10 GB (Night Only), No Calls, No SMS" << "\n";
+    cout << "7. Monthly Premium – 30 Days, 30 GB, 5000 Zong Min, 5000 SMS" << "\n";
+    cout << "8. Monthly Social – 30 Days, 12 GB, No Calls, No SMS" << "\n";
+    cout << "9. Monthly YouTube – 30 Days, 12 GB, No Calls, No SMS" << "\n";
+    cout << "10. Monthly Extreme – 30 Days, 50 GB (Night Only), No Calls, No SMS" << "\n";
+    cout << "11. Daily Video – 1 Day, 1.5 GB, No Calls, No SMS" << "\n";
+    cout << "12. Weekly Data Max – 7 Days, 12 GB, No Calls, No SMS" << "\n";
+    cout << "13. Weekly Mega – 7 Days, 15 GB, No Calls, No SMS" << "\n";
+    cout << "14. Monthly YouTube Plus – 30 Days, 20 GB, No Calls, No SMS" << "\n";
+    cout << "15. Monthly Ultra – 30 Days, 60 GB, No Calls, No SMS" << "\n";
+    cout << "Enter the Selected Bundle: ";
+    cin >> option;
+    double loadamount;
+    string bundlename[15] = {
+        "Daily Basic", "Daily YouTube", "Daily Data Max", "Weekly Super",
+        "Weekly Premium", "Weekly Extreme", "Monthly Premium", "Monthly Social",
+        "Monthly YouTube", "Monthly Extreme", "Daily Video", "Weekly Data Max",
+        "Weekly Mega", "Monthly YouTube Plus", "Monthly Ultra"
+    };
+    double prices[15] = {20, 50, 100, 150, 200, 250, 500, 300, 400, 600, 70, 350, 500, 700, 1000};
+
+    switch (option){
+        case 1:
+            cout << "You Have Selected " << bundlename[0] << " Bundle. The Price is Rs. " << prices[0] << "\n";
+            if (function())
+            {
+                balance = balance - prices[0];
+                loadamount = prices[0];
+                cout << "Your Transaction is Successfully Completed. " << "\n";
+                cout << "Your New Balance is  Rs. " << balance << "\n\n";
+               function2(cnic, loadamount, balance);
+            }
+            break;
+        case 2:
+            cout << "You Have Selected " << bundlename[1] << " Bundle. The Price is Rs. " << prices[1] << "\n";
+            if (function())
+            {
+                balance = balance - prices[1];
+                loadamount = prices[1];
+                cout << "Your Transaction is Successfully Completed. " << "\n";
+                cout << "Your New Balance is  Rs. " << balance << "\n\n";
+               function2(cnic, loadamount, balance);
+            }
+            break;
+        case 3: 
+            cout << "You Have Selected " << bundlename[2] << " Bundle. The Price is Rs. " << prices[2] << "\n";
+            if (function())
+            {
+                balance = balance - prices[2];
+                loadamount = prices[2];
+                cout << "Your Transaction is Successfully Completed. " << "\n";
+                cout << "Your New Balance is  Rs. " << balance << "\n\n";
+               function2(cnic, loadamount, balance);
+            }   
+            break;
+        case 4:
+            cout << "You Have Selected " << bundlename[3] << " Bundle. The Price is Rs. " << prices[3] << "\n";
+            if (function())
+            {
+                balance = balance - prices[3];
+                loadamount = prices[3];
+                cout << "Your Transaction is Successfully Completed. " << "\n";
+                cout << "Your New Balance is  Rs. " << balance << "\n\n";
+               function2(cnic, loadamount, balance);
+            }
+            break;
+        case 5: 
+            cout << "You Have Selected " << bundlename[4] << " Bundle. The Price is Rs. " << prices[4] << "\n";
+            if (function())
+            {
+                balance = balance - prices[4];
+                loadamount = prices[4];   
+                cout << "Your Transaction is Successfully Completed. " << "\n";
+                cout << "Your New Balance is  Rs. " << balance << "\n\n";
+               function2(cnic, loadamount, balance);
+            }
+            break;
+        case 6:
+            cout << "You Have Selected " << bundlename[5] << " Bundle. The Price is Rs. " << prices[5] << "\n";
+            if (function())
+            {
+                balance = balance - prices[5];
+                loadamount = prices[5];
+                cout << "Your Transaction is Successfully Completed. " << "\n";
+                cout << "Your New Balance is  Rs. " << balance << "\n\n";
+               function2(cnic, loadamount, balance);
+            }
+            break;
+        case 7:
+            cout << "You Have Selected " << bundlename[6] << " Bundle. The Price is Rs. " << prices[6] << "\n";
+            if (function())
+            {
+                balance = balance - prices[6];
+                loadamount = prices[6];
+                cout << "Your Transaction is Successfully Completed. " << "\n";
+                cout << "Your New Balance is  Rs. " << balance << "\n\n";
+               function2(cnic, loadamount, balance);
+            }
+            break;
+        case 8:
+            cout << "You Have Selected " << bundlename[7] << " Bundle. The Price is Rs. " << prices[7] << "\n";
+            if (function())
+            {
+                balance = balance - prices[7];
+                loadamount = prices[7];
+                cout << "Your Transaction is Successfully Completed. " << "\n";
+                cout << "Your New Balance is  Rs. " << balance << "\n\n";
+               function2(cnic, loadamount, balance);
+        }
+            break;
+        case 9:
+            cout << "You Have Selected " << bundlename[8] << " Bundle. The Price is Rs. " << prices[8] << "\n";
+            if (function())
+            {
+                balance = balance - prices[8];
+                loadamount = prices[8];   
+                cout << "Your Transaction is Successfully Completed. " << "\n";
+                cout << "Your New Balance is  Rs. " << balance << "\n\n";
+               function2(cnic, loadamount, balance);
+            }
+            break;
+        case 10:
+            cout << "You Have Selected " << bundlename[9] << " Bundle. The Price is Rs. " << prices[9] << "\n";
+            if (function())
+            {
+                balance = balance - prices[9];
+                loadamount = prices[9];
+                cout << "Your Transaction is Successfully Completed. " << "\n";
+                cout << "Your New Balance is  Rs. " << balance << "\n\n";
+               function2(cnic, loadamount, balance);
+            }
+            break;
+        case 11:    
+            cout << "You Have Selected " << bundlename[10] << " Bundle. The Price is Rs. " << prices[10] << "\n";
+            if (function())
+            {
+                balance = balance - prices[10];
+                loadamount = prices[10];
+                cout << "Your Transaction is Successfully Completed. " << "\n";
+                cout << "Your New Balance is  Rs. " << balance << "\n\n";
+               function2(cnic, loadamount, balance);
+            }
+            break;
+        case 12:
+            cout << "You Have Selected " << bundlename[11] << " Bundle. The Price is Rs. " << prices[11] << "\n";
+            if (function())
+            {
+                balance = balance - prices[11];
+                loadamount = prices[11];
+                cout << "Your Transaction is Successfully Completed. " << "\n";
+                cout << "Your New Balance is  Rs. " << balance << "\n\n";
+               function2(cnic, loadamount, balance);
+            }
+            break;
+        case 13:
+            cout << "You Have Selected " << bundlename[12] << " Bundle. The Price is Rs. " << prices[12] << "\n";
+            if (function())
+            {
+                balance = balance - prices[12];
+                loadamount = prices[12];
+                cout << "Your Transaction is Successfully Completed. " << "\n";
+                cout << "Your New Balance is  Rs. " << balance << "\n\n";
+               function2(cnic, loadamount, balance);
+            }
+            break;
+        case 14:
+            cout << "You Have Selected " << bundlename[13] << " Bundle. The Price is Rs. " << prices[13] << "\n";
+            if (function())
+            {
+                balance = balance - prices[13];
+                loadamount = prices[13];
+                cout << "Your Transaction is Successfully Completed. " << "\n";
+                cout << "Your New Balance is  Rs. " << balance << "\n\n";
+               function2(cnic, loadamount, balance);
+            }
+            break;
+        case 15:
+            cout << "You Have Selected " << bundlename[14] << " Bundle. The Price is Rs. " << prices[14] << "\n";
+            if (function())
+            {
+                balance = balance - prices[14];
+                loadamount = prices[14];
+                cout << "Your Transaction is Successfully Completed. " << "\n";
+                cout << "Your New Balance is  Rs. " << balance << "\n\n";
+               function2(cnic, loadamount, balance);
+            }
+            break;
+        default:
+            cout << "Invalid Selection. Please Enter a Valid Option. \n";
+            break;
+            }
+}
+void ufonebundles(bool (*function)(), void (*function2)(string,double,double&),double& balance,string cnic) {
+    int option;
+    cout << "Welcome to Ufone Bundles and Offers" << "\n\n";
+    cout << "1. Daily Chat – 1 Day, 500 MB, 100 Ufone Min, 100 SMS" << "\n";
+    cout << "2. Daily Light – 1 Day, 1 GB, 200 Ufone Min, 200 SMS" << "\n";
+    cout << "3. Daily YouTube – 1 Day, 1.5 GB, No Calls, No SMS" << "\n";
+    cout << "4. Weekly Light – 7 Days, 5 GB, 1000 Ufone Min, 1000 SMS" << "\n";
+    cout << "5. Weekly Heavy – 7 Days, 8 GB, 1500 Ufone Min, 1500 SMS" << "\n";
+    cout << "6. Weekly Social – 7 Days, 3 GB (Social Only), No Calls, No SMS" << "\n";
+    cout << "7. Monthly Social – 30 Days, 10 GB, No Calls, No SMS" << "\n";
+    cout << "8. Monthly Heavy – 30 Days, 25 GB, 5000 Ufone Min, 5000 SMS" << "\n";
+    cout << "9. Monthly Prime – 30 Days, 50 GB, 10000 Ufone Min, 10000 SMS" << "\n";
+    cout << "10. Monthly Extreme – 30 Days, 75 GB (Night Only), No Calls, No SMS" << "\n";
+    cout << "11. Daily Unlimited – 1 Day, 4 GB, No Calls, No SMS" << "\n";
+    cout << "12. Weekly Mega – 7 Days, 12 GB, No Calls, No SMS" << "\n";
+    cout << "13. Weekly Hybrid – 7 Days, 15 GB, 1000 Ufone Min, 1000 SMS" << "\n";
+    cout << "14. Monthly Supreme – 30 Days, 35 GB, No Calls, No SMS" << "\n";
+    cout << "15. Monthly YouTube Plus – 30 Days, 18 GB, No Calls, No SMS" << "\n";
+    cout << "Enter the Selected Bundle: ";
+    cin >> option;
+    double loadamount;
+    string bundlename[15] = {
+        "Daily Chat", "Daily Light", "Daily YouTube", "Weekly Light",
+        "Weekly Heavy", "Weekly Social", "Monthly Social", "Monthly Heavy",
+        "Monthly Prime", "Monthly Extreme", "Daily Unlimited", "Weekly Mega",
+        "Weekly Hybrid", "Monthly Supreme", "Monthly YouTube Plus"
+    };
+    double prices[15] = {10, 30, 50, 100, 150, 120, 250, 500, 700, 1000, 70, 300, 400, 600, 800};
+
+    switch (option){
+        case 1:
+            cout << "You Have Selected " << bundlename[0] << " Bundle. The Price is Rs. " << prices[0] << "\n";
+            if (function())
+            {
+                balance = balance - prices[0];
+                loadamount = prices[0];
+                cout << "Your Transaction is Successfully Completed. " << "\n";
+                cout << "Your New Balance is  Rs. " << balance << "\n\n";
+               function2(cnic, loadamount, balance);
+            }
+            break;
+        case 2:
+            cout << "You Have Selected " << bundlename[1] << " Bundle. The Price is Rs. " << prices[1] << "\n";
+            if (function())
+            {
+                balance = balance - prices[1];
+                loadamount = prices[1];
+                cout << "Your Transaction is Successfully Completed. " << "\n";
+                cout << "Your New Balance is  Rs. " << balance << "\n\n";
+               function2(cnic, loadamount, balance);
+            }
+            break;
+        case 3: 
+            cout << "You Have Selected " << bundlename[2] << " Bundle. The Price is Rs. " << prices[2] << "\n";
+            if (function())
+            {
+                balance = balance - prices[2];
+                loadamount = prices[2];
+                cout << "Your Transaction is Successfully Completed. " << "\n";
+                cout << "Your New Balance is  Rs. " << balance << "\n\n";
+               function2(cnic, loadamount, balance);
+            }   
+            break;
+        case 4:
+            cout << "You Have Selected " << bundlename[3] << " Bundle. The Price is Rs. " << prices[3] << "\n";
+            if (function())
+            {
+                balance = balance - prices[3];
+                loadamount = prices[3];
+                cout << "Your Transaction is Successfully Completed. " << "\n";
+                cout << "Your New Balance is  Rs. " << balance << "\n\n";
+               function2(cnic, loadamount, balance);
+            }
+            break;
+        case 5: 
+            cout << "You Have Selected " << bundlename[4] << " Bundle. The Price is Rs. " << prices[4] << "\n";
+            if (function())
+            {
+                balance = balance - prices[4];
+                loadamount = prices[4];   
+                cout << "Your Transaction is Successfully Completed. " << "\n";
+                cout << "Your New Balance is  Rs. " << balance << "\n\n";
+               function2(cnic, loadamount, balance);
+            }
+            break;
+        case 6:
+            cout << "You Have Selected " << bundlename[5] << " Bundle. The Price is Rs. " << prices[5] << "\n";
+            if (function())
+            {
+                balance = balance - prices[5];
+                loadamount = prices[5];
+                cout << "Your Transaction is Successfully Completed. " << "\n";
+                cout << "Your New Balance is  Rs. " << balance << "\n\n";
+               function2(cnic, loadamount, balance);
+            }
+            break;
+        case 7:
+            cout << "You Have Selected " << bundlename[6] << " Bundle. The Price is Rs. " << prices[6] << "\n";
+            if (function())
+            {
+                balance = balance - prices[6];
+                loadamount = prices[6];
+                cout << "Your Transaction is Successfully Completed. " << "\n";
+                cout << "Your New Balance is  Rs. " << balance << "\n\n";
+               function2(cnic, loadamount, balance);
+            }
+            break;
+        case 8:
+            cout << "You Have Selected " << bundlename[7] << " Bundle. The Price is Rs. " << prices[7] << "\n";
+            if (function())
+            {
+                balance = balance - prices[7];
+                loadamount = prices[7];
+                cout << "Your Transaction is Successfully Completed. " << "\n";
+                cout << "Your New Balance is  Rs. " << balance << "\n\n";
+               function2(cnic, loadamount, balance);
+        }
+            break;
+        case 9:
+            cout << "You Have Selected " << bundlename[8] << " Bundle. The Price is Rs. " << prices[8] << "\n";
+            if (function())
+            {
+                balance = balance - prices[8];
+                loadamount = prices[8];   
+                cout << "Your Transaction is Successfully Completed. " << "\n";
+                cout << "Your New Balance is  Rs. " << balance << "\n\n";
+               function2(cnic, loadamount, balance);
+            }
+            break;
+        case 10:
+            cout << "You Have Selected " << bundlename[9] << " Bundle. The Price is Rs. " << prices[9] << "\n";
+            if (function())
+            {
+                balance = balance - prices[9];
+                loadamount = prices[9];
+                cout << "Your Transaction is Successfully Completed. " << "\n";
+                cout << "Your New Balance is  Rs. " << balance << "\n\n";
+               function2(cnic, loadamount, balance);
+            }
+            break;
+        case 11:    
+            cout << "You Have Selected " << bundlename[10] << " Bundle. The Price is Rs. " << prices[10] << "\n";
+            if (function())
+            {
+                balance = balance - prices[10];
+                loadamount = prices[10];
+                cout << "Your Transaction is Successfully Completed. " << "\n";
+                cout << "Your New Balance is  Rs. " << balance << "\n\n";
+               function2(cnic, loadamount, balance);
+            }
+            break;
+        case 12:
+            cout << "You Have Selected " << bundlename[11] << " Bundle. The Price is Rs. " << prices[11] << "\n";
+            if (function())
+            {
+                balance = balance - prices[11];
+                loadamount = prices[11];
+                cout << "Your Transaction is Successfully Completed. " << "\n";
+                cout << "Your New Balance is  Rs. " << balance << "\n\n";
+               function2(cnic, loadamount, balance);
+            }
+            break;
+        case 13:
+            cout << "You Have Selected " << bundlename[12] << " Bundle. The Price is Rs. " << prices[12] << "\n";
+            if (function())
+            {
+                balance = balance - prices[12];
+                loadamount = prices[12];
+                cout << "Your Transaction is Successfully Completed. " << "\n";
+                cout << "Your New Balance is  Rs. " << balance << "\n\n";
+               function2(cnic, loadamount, balance);
+            }
+            break;
+        case 14:
+            cout << "You Have Selected " << bundlename[13] << " Bundle. The Price is Rs. " << prices[13] << "\n";
+            if (function())
+            {
+                balance = balance - prices[13];
+                loadamount = prices[13];
+                cout << "Your Transaction is Successfully Completed. " << "\n";
+                cout << "Your New Balance is  Rs. " << balance << "\n\n";
+               function2(cnic, loadamount, balance);
+            }
+            break;
+        case 15:
+            cout << "You Have Selected " << bundlename[14] << " Bundle. The Price is Rs. " << prices[14] << "\n";
+            if (function())
+            {
+                balance = balance - prices[14];
+                loadamount = prices[14];
+                cout << "Your Transaction is Successfully Completed. " << "\n";
+                cout << "Your New Balance is  Rs. " << balance << "\n\n";
+               function2(cnic, loadamount, balance);
+            }
+            break;
+        default:
+            cout << "Invalid Selection. Please Enter a Valid Option. \n";
+            break;
+            }
+}
+
+
 // Function to Validate Respective Input Data Type
 double checkinputtype(const string& prompt) {
     double input;
@@ -38,7 +956,7 @@ double checkinputtype(const string& prompt) {
 }
 // Validate User Entered Pin
 bool pincheck(string& pin, int tryagain = 4) {
-
+    
     string userpin;
     while (tryagain > 0)
     {
@@ -59,8 +977,61 @@ bool pincheck(string& pin, int tryagain = 4) {
     return false;
 
 }
+// Function to check Wallet Number
+bool checklenghtwallet (string account){
+    if (account.length() != 11 ){
+    return false ; }
+   
+    for (int i = 0 ; i <11 ; i++ ){
+       if (account[i] < '0' || account [i] > '9' ) {
+           return false;
+       }
+       }
+       
+       if (account[0] != '0' || account[1] !='3'){
+           return false;
+       }
+    
+       return true;
+   }
+// Function to validate cnic
+bool checkcnic (string cnicc) {
+       if (cnicc.length() !=13){
+           return false;
+       }
+       
+    for (int i = 0 ; i <13 ; i++ )
+        if (cnicc[i] < '0' || cnicc [i] > '9' ) {
+            return false;
+        }
+        
+   return true;
+   }
+// Validate Pin
+bool checkpin (string pinn) {
+      if (pinn.length() !=4){
+    return false;
+}
+for (int i = 0 ; i <4 ; i++ ){
+    if (pinn[i] < '0' || pinn [i] > '9' ) {
+        return false;
+    }
+    }
 
+return true;
 
+}
+string removeSpaces(const string& str) {
+    string result;
+    for (char c : str) {
+        if (c != ' ') { // Ignore spaces
+            result += c;
+        }
+    }
+    return result;
+}
+
+// Saving New Accounts
 void savenewaccounts( string& name, string& cnic, double notfixedacc, double& balance ,string& pin) {
 
     ofstream recenttrans("allaccounts.txt", ios::app);
@@ -75,7 +1046,6 @@ void savenewaccounts( string& name, string& cnic, double notfixedacc, double& ba
         cout << "There is an Error in Opening The File. ";
     }
 }
-
 // Function to Recall Data
 bool loadvariableinfo( string& name, string& cnic, double& notfixedacc, double& balance ,string& pin) {
     ifstream data("allaccounts.txt");
@@ -104,6 +1074,7 @@ bool loadvariableinfo( string& name, string& cnic, double& notfixedacc, double& 
             notfixedacc = temp_notfixedaccount;
             balance = temp_updatedbalance;
             pin = pin2;
+            cnic = cnic2;
             data.close();
             return true; 
         }
@@ -113,7 +1084,6 @@ bool loadvariableinfo( string& name, string& cnic, double& notfixedacc, double& 
     data.close();
     return false;
 }
-
 // Function to validate login by checking CNIC, username, and password
 bool validatelogin(const string& enteredcnic, const string& enteredusername, const string& enteredpassword) {
     ifstream logindata("logindata.txt");
@@ -131,12 +1101,17 @@ bool validatelogin(const string& enteredcnic, const string& enteredusername, con
         getline(ss, cnic, ',');
         getline(ss, username, ',');
         getline(ss, password, ',');
+        string newenteredusername = removeSpaces(enteredusername);
+        string newstoredusername = removeSpaces(username);
+        string newstoredpassword = removeSpaces(password);
+        string newenteredpassword = removeSpaces(enteredpassword);
 
         if (cnic == enteredcnic) {
             cnicfound = true;
-            if (username == enteredusername && password == enteredpassword) {
+
+            if (newstoredusername == newenteredusername && newstoredpassword == newenteredpassword) {
                 logindata.close();
-                return true;
+                return  true;
             }
         }
     }
@@ -147,11 +1122,11 @@ bool validatelogin(const string& enteredcnic, const string& enteredusername, con
         cout << "There is No Registered Account Against this CNIC, Please Register an Account First.\n";
     } else {
         cout << "Please Enter Correct Username or Password to Login.\n";
+        return false;
     }
     
-    return false;
+    return cnicfound;
 }
-
 bool checkduplicatecnic(const string& enteredcnic, const string& enteredusername, const string& enteredpassword) {
     ifstream logindata("logindata.txt");
     if (!logindata) {
@@ -175,16 +1150,18 @@ bool checkduplicatecnic(const string& enteredcnic, const string& enteredusername
     logindata.close();
     
     
-    return false;
+    return cnicfound;
 }
 // Function To Save Only Username and Password For Login
 void savelogindata( const string cnic ,string& username, string& password) {
 
     ofstream recenttrans("logindata.txt", ios::app);
+    string newusername = removeSpaces(username);
+    string newpassword = removeSpaces(password);
     // Check if the file opened successfully
     if (recenttrans.is_open())
     {
-        recenttrans  << cnic << "," << username << "," << password << "\n" ;// Append data to the file  
+        recenttrans  << cnic << "," << newusername << "," << newpassword << "\n" ;// Append data to the file  
         recenttrans.close();
     }
     else
@@ -192,9 +1169,9 @@ void savelogindata( const string cnic ,string& username, string& password) {
         cout << "There is an Error in Opening The File. ";
     }
 }
-
 // Function to Save All Transactions History
 void savetransaction(const string& name, string cnic, double notfixedacc, double balance) {
+
     string filename = "User_" + cnic + ".txt";
     ofstream data(filename, ios::app);
     // Check if the file opened successfully
@@ -207,6 +1184,26 @@ void savetransaction(const string& name, string cnic, double notfixedacc, double
     {
         cout << "There is an Error in Opening The File. ";
     }
+}
+// Function to Save Data and Copy After Login
+void copyvariabledata(const string& name, string cnic , double notfixedacc, string pin,string username,string password) {
+    string filename = "User_" + username + ".txt";
+   ofstream data(filename, ios::trunc);
+   if (data.is_open())
+   {
+       data << name << endl;
+       data << notfixedacc << endl;
+       data << cnic << endl;
+       data << pin << endl;
+       data << username <<endl;
+       data << password << endl;
+       data.close();
+   }
+   else
+   {
+       cout << "There is an Error in Opening The File. \n";
+   }
+
 }
 
 
@@ -225,8 +1222,6 @@ void withdrawamount(string cnic,double& withdrawal, double& balance) {
         cout << "There is an Error in Opening The File. \n";
     }
 }
-
-
 // Function to Save Transfer Transactions History
 void transferamount(string cnic, double moneytranfer, double balance,string reciveraccount)  {
     string filename = "User_" + cnic + ".txt";
@@ -257,61 +1252,383 @@ void depositamount(string cnic,double deposit, double balance) {
         cout << "There is an Error in Opening The File. \n";
     }
 }
-
-// Function to Save Data and Copy After Login
-void copyvariabledata(const string& name, string cnic , double notfixedacc, string pin,string username,string password) {
-     string filename = "User_" + username + ".txt";
-    ofstream data(filename, ios::trunc);
-    if (data.is_open())
+void bundletransaction(string cnic,double loadamount, double& balance){
+    string filename = "User_" + cnic + ".txt";
+    ofstream recenttrans(filename, ios::app);
+    // Check if the file opened successfully
+    if (recenttrans.is_open())
     {
-        data << name << endl;
-        data << notfixedacc << endl;
-        data << cnic << endl;
-        data << pin << endl;
-        data << username <<endl;
-        data << password << endl;
-        data.close();
+        recenttrans << "Subscribed Bundle Rs. " << loadamount << ", New Balance is Rs. " << balance << "\n";
+        recenttrans.close();
     }
     else
     {
         cout << "There is an Error in Opening The File. \n";
     }
-
+}
+void loadtransaction(string cnic,double loadamount, double& balance){
+    string filename = "User_" + cnic + ".txt";
+    ofstream recenttrans(filename, ios::app);
+    // Check if the file opened successfully
+    if (recenttrans.is_open())
+    {
+        recenttrans << "Loaded Rs. " << loadamount << ", New Balance is Rs. " << balance << "\n";
+        recenttrans.close();
+    }
+    else
+    {
+        cout << "There is an Error in Opening The File. \n";
+    }
 }
 
 
-// Function to check Wallet Number
-bool checklenghtwallet (string account){
- if (account.length() != 11 ){
- return false ; }
+// Function to Reset and Change Credintials Like Username, Password, and Pin.
+void resetpassword(string& password, const string& cnic) {
+    string userinputcnic;
+    cout << "Enter Your 13 Digit National Identification Number : ";
+    getline(cin, userinputcnic);
+    int tryagain = 4;
+    while (!checkcnic(userinputcnic) && tryagain > 0)
+{
+    cout << "Error! National Identification Number is Not Valid, Please Enter Valid  National Identification Number. \n";
+    cout << " Please Enter Again (Limit 4 Times) : ";
+    cin >> userinputcnic;
+    tryagain--;
+    if (tryagain == 0)
+    {
+        cout << "\n You Failed to Enter Valid National Identification Number, Returning Back to Main Menu. \n\n";
+        break;
+    }
+}
+    string newpassword;
+    cout << "Enter Your New Password: ";
+    cin >> newpassword;
 
- for (int i = 0 ; i <=11 ; i++ ){
-    if (account[i] >= '0' || account [i] <= '9' ) {
-        return false;
+    password = newpassword;
+    cout << "Password Reset Successfully!\n";
+
+    // Update password in the file
+    ifstream infile("logindata.txt");
+    ofstream outfile("temp.txt");
+    string line;
+
+    while (getline(infile, line)) {
+        stringstream ss(line);
+        string cnicfile, usernamefile, passwordfile;
+        getline(ss, cnicfile, ',');
+        getline(ss, usernamefile, ',');
+        getline(ss, passwordfile, ',');
+
+        if (cnicfile == cnic) {
+            outfile << cnicfile << "," << usernamefile << "," << password << "\n";
+        } else {
+            outfile << line << "\n";
+        }
     }
+
+    infile.close();
+    outfile.close();
+
+    // Replace the old file with the updated one
+    remove("logindata.txt");
+    rename("temp.txt", "logindata.txt");
+}
+void changepassword(string& password, const string& cnic) {
+    string newpassword;
+    cout << "Enter Your New Password: ";
+    cin >> newpassword;
+
+    password = newpassword;
+    cout << "Password Changed Successfully!\n";
+
+    // Update password in the file
+    ifstream infile("logindata.txt");
+    ofstream outfile("temp.txt");
+    string line;
+
+    while (getline(infile, line)) {
+        stringstream ss(line);
+        string cnicfile, usernamefile, passwordfile;
+        getline(ss, cnicfile, ',');
+        getline(ss, usernamefile, ',');
+        getline(ss, passwordfile, ',');
+
+        if (cnicfile == cnic) {
+            outfile << cnicfile << "," << usernamefile << "," << password << "\n";
+        } else {
+            outfile << line << "\n";
+        }
     }
-    
-    if (account[0] != '0' || account[1] !='3'){
-        return false;
+
+    infile.close();
+    outfile.close();
+
+    // Replace the old file with the updated one
+    remove("logindata.txt");
+    rename("temp.txt", "logindata.txt");
+}
+void resetusername(string& username, const string& cnic) {
+
+    string userinputcnic;
+    cout << "Enter Your 13 Digit National Identification Number : ";
+    getline(cin, userinputcnic);
+    int tryagain = 4;
+    while (!checkcnic(userinputcnic) && tryagain > 0)
+{
+    cout << "Error! National Identification Number is Not Valid, Please Enter Valid  National Identification Number. \n";
+    cout << " Please Enter Again (Limit 4 Times) : ";
+    cin >> userinputcnic;
+    tryagain--;
+    if (tryagain == 0)
+    {
+        cout << "\n You Failed to Enter Valid National Identification Number, Returning Back to Main Menu. \n\n";
+        break;
     }
- 
-    return true;
 }
 
-// Function to validate cnic
+    string newusername;
+    cout << "Enter Your New Username: ";
+    cin >> newusername;
 
-bool checkcnic (string cnicc) {
-    if (cnicc.length() !=13){
-        return false;
+    // Check if the new username is unique
+    ifstream logindata("logindata.txt");
+    string line, cnicfile, usernamefile, passwordfile;
+    bool is_unique = true;
+
+    while (getline(logindata, line)) {
+        stringstream ss(line);
+        getline(ss, cnicfile, ',');
+        getline(ss, usernamefile, ',');
+        getline(ss, passwordfile, ',');
+
+        if (usernamefile == newusername) {
+            is_unique = false;
+            break;
+        }
     }
-return true;
+
+    logindata.close();
+
+    if (is_unique) {
+        username = newusername;
+        cout << "Username Reset Successfully!\n";
+
+        // Update username in the file
+        ifstream infile("logindata.txt");
+        ofstream outfile("temp.txt");
+
+        while (getline(infile, line)) {
+            stringstream ss(line);
+            getline(ss, cnicfile, ',');
+            getline(ss, usernamefile, ',');
+            getline(ss, passwordfile, ',');
+
+            if (cnicfile == cnic) {
+                outfile << cnicfile << "," << username << "," << passwordfile << "\n";
+            } else {
+                outfile << line << "\n";
+            }
+        }
+
+        infile.close();
+        outfile.close();
+
+        // Replace the old file with the updated one
+        remove("logindata.txt");
+        rename("temp.txt", "logindata.txt");
+    } else {
+        cout << "Username already exists! Please choose a different username.\n";
+    }
 }
-bool checkpin (string pinn) {
-    if (pinn.length() !=4){
-        return false;
-    }
-return true;
+void changeusername(string& username, const string& cnic) {
+    string newusername;
+    cout << "Enter Your New Username: ";
+    cin >> newusername;
 
+    // Check if the new username is unique
+    ifstream logindata("logindata.txt");
+    string line, cnicfile, usernamefile, passwordfile;
+    bool is_unique = true;
+
+    while (getline(logindata, line)) {
+        stringstream ss(line);
+        getline(ss, cnicfile, ',');
+        getline(ss, usernamefile, ',');
+        getline(ss, passwordfile, ',');
+
+        if (usernamefile == newusername) {
+            is_unique = false;
+            break;
+        }
+    }
+
+    logindata.close();
+
+    if (is_unique) {
+        // Assign the new username only if it is unique
+        username = newusername;
+        cout << "Username Changed Successfully!\n";
+
+        // Update username in the file
+        ifstream infile("logindata.txt");
+        ofstream outfile("temp.txt");
+
+        while (getline(infile, line)) {
+            stringstream ss(line);
+            getline(ss, cnicfile, ',');
+            getline(ss, usernamefile, ',');
+            getline(ss, passwordfile, ',');
+
+            if (cnicfile == cnic) {
+                outfile << cnicfile << "," << username << "," << passwordfile << "\n";
+            } else {
+                outfile << line << "\n";
+            }
+        }
+
+        infile.close();
+        outfile.close();
+
+        // Replace the old file with the updated one
+        remove("logindata.txt");
+        rename("temp.txt", "logindata.txt");
+    } else {
+        cout << "Username already exists! Please choose a different username.\n";
+    }
+}
+void changepin(string& pin, const string& cnic) {
+    string existingpin, newpin;
+    cout << "Enter Your Current PIN: ";
+    cin >> existingpin;
+
+    // Verify current PIN
+    if (existingpin != pin) {
+        cout << "Error: Incorrect current PIN. Please try again.\n";
+        return;
+    }
+
+    // Validate new PIN
+    cout << "Enter Your New 4-Digit PIN: ";
+    cin >> newpin;
+
+    if (newpin.length() == 4 && newpin.find_first_not_of("0123456789") == string::npos) {
+        pin = newpin;
+        cout << "PIN Changed Successfully!\n";
+
+        // Update PIN in the file
+        ifstream infile("allaccounts.txt");
+        ofstream outfile("temp.txt");
+        string line;
+
+        while (getline(infile, line)) {
+            stringstream ss(line);
+            string name, cnicfile, acc_num, balance, pinfile;
+            getline(ss, name, ',');
+            getline(ss, cnicfile, ',');
+            getline(ss, acc_num, ',');
+            getline(ss, balance, ',');
+            getline(ss, pinfile, ',');
+
+            if (cnicfile == cnic) {
+                outfile << name << "," << cnicfile << "," << acc_num << "," << balance << "," << pin << "\n";
+            } else {
+                outfile << line << "\n";
+            }
+        }
+
+        infile.close();
+        outfile.close();
+
+        // Replace the old file with the updated one
+        remove("allaccounts.txt");
+        rename("temp.txt", "allaccounts.txt");
+    } else {
+        cout << "Invalid PIN! PIN must be a 4-digit number.\n";
+    }
+}
+void resetpin(string& pin, const string& cnic) {
+    string userinputcnic;
+    cout << "Enter Your 13 Digit National Identification Number : ";
+    getline(cin, userinputcnic);
+    int tryagain = 4;
+    while (!checkcnic(userinputcnic) && tryagain > 0)
+{
+    cout << "Error! National Identification Number is Not Valid, Please Enter Valid  National Identification Number. \n";
+    cout << " Please Enter Again (Limit 4 Times) : ";
+    cin >> userinputcnic;
+    tryagain--;
+    if (tryagain == 0)
+    {
+        cout << "\n You Failed to Enter Valid National Identification Number, Returning Back to Main Menu. \n\n";
+        break;
+    }
+}
+    string username, newpin;
+    cout << "Enter Your Username: ";
+    cin >> username;
+
+    // Verify user identity
+    ifstream logindata("logindata.txt");
+    string line, cnicfile, usernamefile, passwordfile;
+    bool user_found = false;
+
+    while (getline(logindata, line)) {
+        stringstream ss(line);
+        getline(ss, cnicfile, ',');
+        getline(ss, usernamefile, ',');
+        getline(ss, passwordfile, ',');
+
+        if (cnicfile == cnic && usernamefile == username) {
+            user_found = true;
+            break;
+        }
+    }
+
+    logindata.close();
+
+    if (!user_found) {
+        cout << "Error: User not found. Please check your CNIC and username.\n";
+        return;
+    }
+
+    // Validate new PIN
+    cout << "Enter Your New 4-Digit PIN: ";
+    cin >> newpin;
+
+    if (newpin.length() == 4 && newpin.find_first_not_of("0123456789") == string::npos) {
+        // Update PIN in allaccounts.txt
+        ifstream infile("allaccounts.txt");
+        ofstream outfile("temp.txt");
+        string line;
+
+        while (getline(infile, line)) {
+            stringstream ss(line);
+            string name, cnicfile, acc_num, balance, pinfile;
+            getline(ss, name, ',');
+            getline(ss, cnicfile, ',');
+            getline(ss, acc_num, ',');
+            getline(ss, balance, ',');
+            getline(ss, pinfile, ',');
+
+            if (cnicfile == cnic) {
+                outfile << name << "," << cnicfile << "," << acc_num << "," << balance << "," << newpin << "\n";
+            } else {
+                outfile << line << "\n";
+            }
+        }
+
+        infile.close();
+        outfile.close();
+
+        // Replace the old file with the updated one
+        remove("allaccounts.txt");
+        rename("temp.txt", "allaccounts.txt");
+
+
+        cout << "PIN Reset Successfully!\n";
+    } else {
+        cout << "Invalid PIN! PIN must be a 4-digit number.\n";
+}
 }
 
 int main()
@@ -319,7 +1636,7 @@ int main()
     // Declaring Variables
     double deposit = 0, balance = 0, withdrawal = 0, notfixedacc = 0,
     transfermoney=0;
-    int transferoption,walletnumber,accountoption, option ;
+    int transferoption,walletnumber,accountoption, option, tryagain = 4,tryagainn = 4;
     string receiveraccount,name,cnic, fixedaccnbr = "05101324",pin,username,password;
     ofstream recenttrans;
 
@@ -343,23 +1660,23 @@ int main()
         if (accountoption == 1)
         {
             
-            cout << "Enter Your Name (Use Special Characters Instead Of Space) : ";
+            cout << "Enter Your Name : ";
             getline(cin, name);
 
             // National ID Validation (13-Digit CNIC) with 4 Time Limit
             cout << "Enter Your 13 Digit National Identification Number : ";
             getline(cin, cnic);
-            int tryagain = 4;
-            while (!checkcnic(cnic) && tryagain > 0)
+            while (!checkcnic(cnic) && tryagainn > 0)
             {
                 cout << "Error! National Identification Number is Not Valid, Please Enter Valid  National Identification Number. \n";
                 cout << " Please Enter Again (Limit 4 Times) : ";
-                cin >> cnic;
-                tryagain--;
+                getline (cin,cnic);
+                tryagainn--;
                 if (tryagain == 0)
                 {
                     cout << "\n You Failed to Enter Valid National Identification Number, Returning Back to Main Menu. \n\n";
-                    break;
+                
+                    return 0;
                 }
             }
 
@@ -368,9 +1685,10 @@ int main()
          
            if (check) {
             cout << "This CNIC is Already Registered. Please Login To Continue.\n";
+            return 0;        
         } 
            else {
-            cout << "CNIC is unique. Proceeding..." << endl;
+            cout << "CNIC is Unique. Proceeding..." << endl;
         }        
 
             // Generating Radnom Account Number
@@ -379,25 +1697,39 @@ int main()
               // Create a Pin
             cout << "Enter to Create Your 4 Digit Pin Code : ";
             getline(cin, pin);
-            if (!checkpin(pin)){
-                cout << "Please Enter Valid 4-digit Pin." << "\n";
-            }
-
-            // Creating User name and Password For Banking Services
+           
+            while (tryagain > 0 && !checkpin(pin))
+   {        cout << "Please Enter Valid 4-Digit Pin  \n";
+            cout << "Please,Enter Your Pin (Try Again Limit = 4) : ";
+           getline (cin,pin);
+           tryagain -- ;
+              if (tryagain == 0)
+              {
+                cout << "You Failed to Enter Valid Pin, Returning Back to Main Menu. \n";
+                return 0;
+           }
+          cout << "Pin is Valid. Proceeding... \n";
+                  // Creating User name and Password For Banking Services
             cout << "Thanks For Creating Account in Sharif Bank Ltd, Please Create a UserName and Password to Enjoy our Banking Services.\n";
-            cout << "Enter Your User Name : ";
+            cout << "Enter Your User Name (Spaces Will Be Automatically Terminated) : ";
             getline(cin,username);
-            cout << "Enter Your Password : ";
+            cout << "Enter Your Password (Spaces Will Be Automatically Terminated) -: ";
             getline(cin,password);
             // Account Created Successfully
             cout << "Congratulations " << name << "! You Have Successfully Created Account With Account Number "
                 << "\n" << fixedaccnbr << notfixedacc << " Against Identification Number " << cnic << ". \n";
-            cout << "You have been Given Rs 100 as Bonus on Creating a New Account. \n\n";
+            cout << "You have been Given Rs 100 as Bonus on Creating a New Account. \n";
+            cout << "Please Login To Continue. \n\n";
             balance = 100; 
             // Calling Function to Log Details into the File        
             savenewaccounts(name,  cnic, notfixedacc, balance ,pin);
             savetransaction(name,cnic,notfixedacc,balance);
             savelogindata(cnic,username,password);
+            break;
+            
+
+}
+
 
         }
 
@@ -409,23 +1741,24 @@ int main()
             cin >> usercnic;
             
             cout << "Enter Your User Name : " ;
-            cin >> username;
+            cin.ignore();
+            getline (cin,username);
             
             cout << "Enter Your Password : " ;
-            cin >> userpass; 
+            getline(cin,userpass);
 
          if (validatelogin(usercnic,username,userpass))
         { 
 
           if (loadvariableinfo(name,usercnic,notfixedacc,balance,pin)){
           cout <<  "Welcome Back " << name << ", Enjoy Your Seamless Banking With Sharif Bank Ltd.\n\n ";
-          while (option != 8)
+          while (option != 7)
     {
         cout << "Please Select an Option to Proceed ! \n\n";
         cout << "1. Deposit Money in Your Account" << "\n" << "2. Withdrawl Money From Your Account " << "\n" 
              << "3. Transfer Money " << "\n" << "4. View Account Information " << "\n"  
-             << "6. Credintials Management " << "\n" << "7. Load and Bundles" << "\n" 
-             << "8. Exit " << "\n\n";
+             << "5. Credintials Management " << "\n" << "6. Load and Bundles" << "\n" 
+             << "7. Exit " << "\n\n";
         option = checkinputtype("Enter the Selected Option : ");
 
        
@@ -619,61 +1952,98 @@ int main()
 
         }
 
-        // Modify Pin Code
+        // Modify Account Information Like Pin,Username,Password
         else if (option == 5)
         {
-            double newpin, newoption ; string username,usercnic;
+            int  newoption ;
             cout << "\nPlease Select an Option  ! " << "\n\n";
-            cout << "1. Change Pin Code " << "\n" << "2. Reset Pin" << "\n\n";
+            cout << "1. Change Pin Code " << "\n" << "2. Reset Pin" << "\n";
+            cout << "3. Change Username " << "\n" << "4. Reset Username" << "\n";
+            cout << "5. Change Password " << "\n" << "6. Reset Password" << "\n\n";
             // Validating Input Data Type
             newoption = checkinputtype("Enter the Option : ");
-
-            if (newoption == 1)
+            switch (newoption)
             {
-                if (pincheck(pin)) {
-                    cout << "Enter Your New Pin : ";
-                    cin >> newpin;
-                    pin = newpin;
-                    cout << "Congratulations! Your Pin Have Been Changed. \n\n";
-                    
-                }
-            }
-
-            if (newoption == 2)
-            {
-                cout << "Please, Enter The Required Details to Reset Pin Code. \n";
-                cout << "Enter the Same Details as Filled During Creating a Account. \n ";
-                cout << "Enter Your Name : ";
-                cin >> username;
-                // National ID Validation (5-Digit CNIC) with 4 Time Limit
-                usercnic = checkinputtype("Enter Your 5 Digit National Identification Number > ");
-                int tryagain = 4;
-                
-
-                // Checking Details
-                if (username == name && usercnic == cnic) {
-                    cout << "\n Congratulations! Please Enter Your New Pin : ";
-                    cin >> newpin;
-                    pin = newpin;
-
-                    // Calling Function to Log Details into the File        
-                    
-                }
-                else if (newoption !=0 && newoption!=1){
-                    cout << "\t\t\t\tSorry, The Provided Information Doesn't Match With Records.Try Again! \n\n";
-
-                }
-
-
-            }
-            else {
-                cout << "\nPlease Choose a Valid Option From 1 and 2 \n\n";
+            case 1:
+                 changepin(pin,usercnic);
+                break;
+            case 2 :
+                  resetpin(pin,usercnic);
+                break;
+            case 3 :
+                  changeusername(username,usercnic);
+                break;
+            case 4 :
+                   resetusername(username,usercnic);
+                break;
+            case 5 :
+                    changepassword(userpass,usercnic);
+                break;
+            case 6 :
+                    resetpassword(userpass,usercnic);
+                break;
+            
+            default:
+               cout << "Enter a Valid Option From 1 - 6." << "\n";
+                break;
             }
 
         }
 
+        else if (option==6)
+        {
+            cout << "Welcome to Load and Bundles Section. \n";
+            cout << "1. Load Balance " << "\n" << "2. Buy Bundles " << "\n\n";
+            int loadoption = checkinputtype("Enter the Option : ");
+            if (loadoption == 1)
+            {
+                cout << "Please Select the Network to Load Balance \n";
+                cout << "1. Jazz \n" << "2. Telenor \n" << "3. Zong \n" << "4. Ufone \n\n";
+                int network = checkinputtype("Select the Network : ");
+
+                switch (network)
+                {
+                    case 1 :
+                    loadinterface(valiate_jazznbr,loadtransaction,balance,usercnic);
+                    break;
+                    case 2 :
+                    loadinterface(valiate_telenornbr,loadtransaction,balance,usercnic);
+                    break;
+                    case 3 :
+                    loadinterface(valiate_zongnbr,loadtransaction,balance,usercnic);
+                    break;
+                    case 4 :
+                    loadinterface(valiate_ufonenbr,loadtransaction,balance,usercnic);
+                    break;
+                }
+            
+            }
+            else if (loadoption == 2)
+            {
+                cout << "Please Select the Bundle to Buy \n";
+                cout << "1. Jazz \n" << "2. Telenor \n" << "3. Zong \n" << "4. Ufone \n\n";
+                int network = checkinputtype("Enter the Network : ");
+                
+                switch (network)
+                {
+                    case 1 :
+                    jazzbundles(valiate_jazznbr, bundletransaction, balance,usercnic);
+                    break;
+                    break;
+                    case 2 :
+                    telenorbundles(valiate_telenornbr,bundletransaction,balance,usercnic);
+                    break;
+                    case 3 :
+                    zongbundles(valiate_zongnbr,bundletransaction,balance,usercnic);
+                    break;
+                    case 4 :
+                    ufonebundles(valiate_ufonenbr,bundletransaction,balance,usercnic);
+                    break;
+                }
+            }  
+
         // Exit
-        else if (option == 10)
+        else if (option == 7)
         {
             cout << "Exiting the System. Thank You for Using Sharif Bank (Ltd).\n\n";
 
@@ -689,7 +2059,7 @@ int main()
 
     }
           }
-          
+        }
           else {
             cout << "Sorry, We Cannot Retrieve Your Information.\n\n";
           }
@@ -697,5 +2067,9 @@ int main()
         }
 
 
+    }
+
+    else {
+        cout << "\nPlease Select a Valid Option.\n";
     }
 }
