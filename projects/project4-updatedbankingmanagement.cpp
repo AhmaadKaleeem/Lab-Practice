@@ -54,10 +54,10 @@ bool valiate_jazznbr(){
     for (int i = 0; i < 11; i++){
         if (number[i] < '0' || number[i] > '9' ){
             cout << "Please Enter a Valid Number ! " << endl;
-            return false;;
-        if (number[0] != 0 || number[1] != 3 || number[2] != 0  || number[2] != 2){
+            return false;
+        if (number[0] != 0 || number[1] != 3 || (number[2] != 0  && number[2] != 2)){
             cout << "Please Enter a Valid Jazz Number ! " << endl;
-            return false;;
+            return false;
         }
         }
     }
@@ -149,188 +149,18 @@ void jazzbundles(bool (*function)(),void (*function2)(string,double,double&),dou
    double loadamount;
     string bundlename[16] = {"Daily Social","Daily Super","Daily YouTube","Daily Mega","Weekly Mega","Weekly Super Plus","Weekly Extreme","Monthly Supreme","Monthly Hybrid","Monthly YouTube","Monthly Extreme","Daily Student Package","Weekly Premium","Monthly Supreme Plus","Monthly YouTube Plus","Daily Extreme"};
     double prices[16] = {30,35,27,25,400,600,250,1300,1000,600,1500,50,450,2000,700,40};
-    switch (option)
-    {
-case 1:
-    cout << "You Have Selected " << bundlename[0] << " Bundle. The Price is Rs. " << prices[0] << "\n";
-    if (function());
-    
-        balance = balance - prices[0];
-        loadamount = prices[0];
-        cout << "Your Transaction is Successfully Completed. " << "\n";
-        cout << "Your New Balance is  Rs. " << balance << "\n\n";
-        function2(cnic, loadamount, balance);
-    
-    break;
-case 2:
-    cout << "You Have Selected " << bundlename[1] << " Bundle. The Price is Rs. " << prices[1] << "\n";
-    if (function())
-    {
-        balance = balance - prices[1];
-        loadamount = prices[1];
-        cout << "Your Transaction is Successfully Completed. " << "\n";
-        cout << "Your New Balance is  Rs. " << balance << "\n\n";
-        function2(cnic, loadamount, balance);
-    }
-    break;
-case 3: 
-    cout << "You Have Selected " << bundlename[2] << " Bundle. The Price is Rs. " << prices[2] << "\n";
-    if (function())
-    {
-        balance = balance - prices[2];
-        loadamount = prices[2];
-        cout << "Your Transaction is Successfully Completed. " << "\n";
-        cout << "Your New Balance is  Rs. " << balance << "\n\n";
-        function2(cnic, loadamount, balance);
-    }   
-    break;
-case 4:
-    cout << "You Have Selected " << bundlename[3] << " Bundle. The Price is Rs. " << prices[3] << "\n";
-    if (function())
-    {
-        balance = balance - prices[3];
-        loadamount = prices[3];
-        cout << "Your Transaction is Successfully Completed. " << "\n";
-        cout << "Your New Balance is  Rs. " << balance << "\n\n";
-        function2(cnic, loadamount, balance);
-    }
-    break;
-case 5: 
-    cout << "You Have Selected " << bundlename[4] << " Bundle. The Price is Rs. " << prices[4] << "\n";
-    if (function())
-    {
-        balance = balance - prices[4];
-        loadamount = prices[4];   
-        cout << "Your Transaction is Successfully Completed. " << "\n";
-        cout << "Your New Balance is  Rs. " << balance << "\n\n";
-        function2(cnic, loadamount, balance);
-    }
-    break;
-case 6:
-    cout << "You Have Selected " << bundlename[5] << " Bundle. The Price is Rs. " << prices[5] << "\n";
-    if (function())
-    {
-        balance = balance - prices[5];
-        loadamount = prices[5];
-        cout << "Your Transaction is Successfully Completed. " << "\n";
-        cout << "Your New Balance is  Rs. " << balance << "\n\n";
-        function2(cnic, loadamount, balance);
-    }
-    break;
-case 7:
-    cout << "You Have Selected " << bundlename[6] << " Bundle. The Price is Rs. " << prices[6] << "\n";
-    if (function())
-    {
-        balance = balance - prices[6];
-        loadamount = prices[6];
-        cout << "Your Transaction is Successfully Completed. " << "\n";
-        cout << "Your New Balance is  Rs. " << balance << "\n\n";
-        function2(cnic, loadamount, balance);
-    }
-    break;
-case 8:
-    cout << "You Have Selected " << bundlename[7] << " Bundle. The Price is Rs. " << prices[7] << "\n";
-    if (function())
-    {
-        balance = balance - prices[7];
-        loadamount = prices[7];
-        cout << "Your Transaction is Successfully Completed. " << "\n";
-        cout << "Your New Balance is  Rs. " << balance << "\n\n";
-        function2(cnic, loadamount, balance);
-}
-    break;
-case 9:
-    cout << "You Have Selected " << bundlename[8] << " Bundle. The Price is Rs. " << prices[8] << "\n";
-    if (function())
-    {
-        balance = balance - prices[8];
-        loadamount = prices[8];   
-        cout << "Your Transaction is Successfully Completed. " << "\n";
-        cout << "Your New Balance is  Rs. " << balance << "\n\n";
-        function2(cnic, loadamount, balance);
-    }
-    break;
-case 10:
-    cout << "You Have Selected " << bundlename[9] << " Bundle. The Price is Rs. " << prices[9] << "\n";
-    if (function())
-    {
-        balance = balance - prices[9];
-        loadamount = prices[9];
-        cout << "Your Transaction is Successfully Completed. " << "\n";
-        cout << "Your New Balance is  Rs. " << balance << "\n\n";
-        function2(cnic, loadamount, balance);
-    }
-    break;
-case 11:    
-    cout << "You Have Selected " << bundlename[10] << " Bundle. The Price is Rs. " << prices[10] << "\n";
-    if (function())
-    {
-        balance = balance - prices[10];
-        loadamount = prices[10];
-        cout << "Your Transaction is Successfully Completed. " << "\n";
-        cout << "Your New Balance is  Rs. " << balance << "\n\n";
-        function2(cnic, loadamount, balance);
-    }
-    break;
-case 12:
-    cout << "You Have Selected " << bundlename[11] << " Bundle. The Price is Rs. " << prices[11] << "\n";
-    if (function())
-    {
-        balance = balance - prices[11];
-        loadamount = prices[11];
-        cout << "Your Transaction is Successfully Completed. " << "\n";
-        cout << "Your New Balance is  Rs. " << balance << "\n\n";
-        function2(cnic, loadamount, balance);
-    }
-    break;
-case 13:
-    cout << "You Have Selected " << bundlename[12] << " Bundle. The Price is Rs. " << prices[12] << "\n";
-    if (function())
-    {
-        balance = balance - prices[12];
-        loadamount = prices[12];
-        cout << "Your Transaction is Successfully Completed. " << "\n";
-        cout << "Your New Balance is  Rs. " << balance << "\n\n";
-        function2(cnic, loadamount, balance);
-    }
-    break;
-case 14:
-    cout << "You Have Selected " << bundlename[13] << " Bundle. The Price is Rs. " << prices[13] << "\n";
-    if (function())
-    {
-        balance = balance - prices[13];
-        loadamount = prices[13];
-        cout << "Your Transaction is Successfully Completed. " << "\n";
-        cout << "Your New Balance is  Rs. " << balance << "\n\n";
-        function2(cnic, loadamount, balance);
-    }
-    break;
-case 15:
-    cout << "You Have Selected " << bundlename[14] << " Bundle. The Price is Rs. " << prices[14] << "\n";
-    if (function())
-    {
-        balance = balance - prices[14];
-        loadamount = prices[14];
-        cout << "Your Transaction is Successfully Completed. " << "\n";
-        cout << "Your New Balance is  Rs. " << balance << "\n\n";
-        function2(cnic, loadamount, balance);
-    }
-    break;
-case 16:
-    cout << "You Have Selected " << bundlename[15] << " Bundle. The Price is Rs. " << prices[15] << "\n";
-    if (function())
-    {
-        balance = balance - prices[15];
-        loadamount = prices[15];
-
-        cout << "Your Transaction is Successfully Completed. " << "\n";
-        cout << "Your New Balance is  Rs. " << balance << "\n\n";
-        function2(cnic, loadamount, balance);
-    }
-    break;
-default:
-    cout << "Invalid Selection. Please Enter a Valid Option. \n";
-    break;
+    if (option > 0 && option <= 16) {
+        int index = option - 1;
+        cout << "You Have Selected " << bundlename[index] << " Bundle. The Price is Rs. " << prices[index] << "\n";
+        if (function()) {
+            balance -= prices[index];
+            loadamount = prices[index];
+            cout << "Your Transaction is Successfully Completed. " << "\n";
+            cout << "Your New Balance is  Rs. " << balance << "\n\n";
+            function2(cnic, loadamount, balance);
+        }
+    } else {
+        cout << "Invalid Selection. Please Enter a Valid Option. \n";
     }
 }
 void telenorbundles(bool (*function)(),void (*function2)(string,double,double&), double& balance,string cnic) {
@@ -363,176 +193,19 @@ void telenorbundles(bool (*function)(),void (*function2)(string,double,double&),
     };
     double prices[15] = {50, 70, 100, 200, 300, 250, 400, 700, 500, 1000, 120, 350, 150, 800, 600};
 
-    switch (option){
-        case 1:
-            cout << "You Have Selected " << bundlename[0] << " Bundle. The Price is Rs. " << prices[0] << "\n";
-            if (function())
-            {
-                balance = balance - prices[0];
-                loadamount = prices[0];
-                cout << "Your Transaction is Successfully Completed. " << "\n";
-                cout << "Your New Balance is  Rs. " << balance << "\n\n";
-               function2(cnic, loadamount, balance);
-            }
-            break;
-        case 2:
-            cout << "You Have Selected " << bundlename[1] << " Bundle. The Price is Rs. " << prices[1] << "\n";
-            if (function())
-            {
-                balance = balance - prices[1];
-                loadamount = prices[1];
-                cout << "Your Transaction is Successfully Completed. " << "\n";
-                cout << "Your New Balance is  Rs. " << balance << "\n\n";
-               function2(cnic, loadamount, balance);
-            }
-            break;
-        case 3: 
-            cout << "You Have Selected " << bundlename[2] << " Bundle. The Price is Rs. " << prices[2] << "\n";
-            if (function())
-            {
-                balance = balance - prices[2];
-                loadamount = prices[2];
-                cout << "Your Transaction is Successfully Completed. " << "\n";
-                cout << "Your New Balance is  Rs. " << balance << "\n\n";
-               function2(cnic, loadamount, balance);
-            }   
-            break;
-        case 4:
-            cout << "You Have Selected " << bundlename[3] << " Bundle. The Price is Rs. " << prices[3] << "\n";
-            if (function())
-            {
-                balance = balance - prices[3];
-                loadamount = prices[3];
-                cout << "Your Transaction is Successfully Completed. " << "\n";
-                cout << "Your New Balance is  Rs. " << balance << "\n\n";
-               function2(cnic, loadamount, balance);
-            }
-            break;
-        case 5: 
-            cout << "You Have Selected " << bundlename[4] << " Bundle. The Price is Rs. " << prices[4] << "\n";
-            if (function())
-            {
-                balance = balance - prices[4];
-                loadamount = prices[4];   
-                cout << "Your Transaction is Successfully Completed. " << "\n";
-                cout << "Your New Balance is  Rs. " << balance << "\n\n";
-               function2(cnic, loadamount, balance);
-            }
-            break;
-        case 6:
-            cout << "You Have Selected " << bundlename[5] << " Bundle. The Price is Rs. " << prices[5] << "\n";
-            if (function())
-            {
-                balance = balance - prices[5];
-                loadamount = prices[5];
-                cout << "Your Transaction is Successfully Completed. " << "\n";
-                cout << "Your New Balance is  Rs. " << balance << "\n\n";
-               function2(cnic, loadamount, balance);
-            }
-            break;
-        case 7:
-            cout << "You Have Selected " << bundlename[6] << " Bundle. The Price is Rs. " << prices[6] << "\n";
-            if (function())
-            {
-                balance = balance - prices[6];
-                loadamount = prices[6];
-                cout << "Your Transaction is Successfully Completed. " << "\n";
-                cout << "Your New Balance is  Rs. " << balance << "\n\n";
-               function2(cnic, loadamount, balance);
-            }
-            break;
-        case 8:
-            cout << "You Have Selected " << bundlename[7] << " Bundle. The Price is Rs. " << prices[7] << "\n";
-            if (function())
-            {
-                balance = balance - prices[7];
-                loadamount = prices[7];
-                cout << "Your Transaction is Successfully Completed. " << "\n";
-                cout << "Your New Balance is  Rs. " << balance << "\n\n";
-               function2(cnic, loadamount, balance);
+    if (option > 0 && option <= 15) {
+        int index = option - 1;
+        cout << "You Have Selected " << bundlename[index] << " Bundle. The Price is Rs. " << prices[index] << "\n";
+        if (function()) {
+            balance -= prices[index];
+            loadamount = prices[index];
+            cout << "Your Transaction is Successfully Completed. " << "\n";
+            cout << "Your New Balance is  Rs. " << balance << "\n\n";
+            function2(cnic, loadamount, balance);
         }
-            break;
-        case 9:
-            cout << "You Have Selected " << bundlename[8] << " Bundle. The Price is Rs. " << prices[8] << "\n";
-            if (function())
-            {
-                balance = balance - prices[8];
-                loadamount = prices[8];   
-                cout << "Your Transaction is Successfully Completed. " << "\n";
-                cout << "Your New Balance is  Rs. " << balance << "\n\n";
-               function2(cnic, loadamount, balance);
-            }
-            break;
-        case 10:
-            cout << "You Have Selected " << bundlename[9] << " Bundle. The Price is Rs. " << prices[9] << "\n";
-            if (function())
-            {
-                balance = balance - prices[9];
-                loadamount = prices[9];
-                cout << "Your Transaction is Successfully Completed. " << "\n";
-                cout << "Your New Balance is  Rs. " << balance << "\n\n";
-               function2(cnic, loadamount, balance);
-            }
-            break;
-        case 11:    
-            cout << "You Have Selected " << bundlename[10] << " Bundle. The Price is Rs. " << prices[10] << "\n";
-            if (function())
-            {
-                balance = balance - prices[10];
-                loadamount = prices[10];
-                cout << "Your Transaction is Successfully Completed. " << "\n";
-                cout << "Your New Balance is  Rs. " << balance << "\n\n";
-               function2(cnic, loadamount, balance);
-            }
-            break;
-        case 12:
-            cout << "You Have Selected " << bundlename[11] << " Bundle. The Price is Rs. " << prices[11] << "\n";
-            if (function())
-            {
-                balance = balance - prices[11];
-                loadamount = prices[11];
-                cout << "Your Transaction is Successfully Completed. " << "\n";
-                cout << "Your New Balance is  Rs. " << balance << "\n\n";
-               function2(cnic, loadamount, balance);
-            }
-            break;
-        case 13:
-            cout << "You Have Selected " << bundlename[12] << " Bundle. The Price is Rs. " << prices[12] << "\n";
-            if (function())
-            {
-                balance = balance - prices[12];
-                loadamount = prices[12];
-                cout << "Your Transaction is Successfully Completed. " << "\n";
-                cout << "Your New Balance is  Rs. " << balance << "\n\n";
-               function2(cnic, loadamount, balance);
-            }
-            break;
-        case 14:
-            cout << "You Have Selected " << bundlename[13] << " Bundle. The Price is Rs. " << prices[13] << "\n";
-            if (function())
-            {
-                balance = balance - prices[13];
-                loadamount = prices[13];
-                cout << "Your Transaction is Successfully Completed. " << "\n";
-                cout << "Your New Balance is  Rs. " << balance << "\n\n";
-               function2(cnic, loadamount, balance);
-            }
-            break;
-        case 15:
-            cout << "You Have Selected " << bundlename[14] << " Bundle. The Price is Rs. " << prices[14] << "\n";
-            if (function())
-            {
-                balance = balance - prices[14];
-                loadamount = prices[14];
-                cout << "Your Transaction is Successfully Completed. " << "\n";
-                cout << "Your New Balance is  Rs. " << balance << "\n\n";
-               function2(cnic, loadamount, balance);
-            }
-            break;
-        default:
-            cout << "Invalid Selection. Please Enter a Valid Option. \n";
-            break;
-            }
+    } else {
+        cout << "Invalid Selection. Please Enter a Valid Option. \n";
+    }
 }
 void zongbundles(bool (*function)(),void (*function2)(string,double,double&), double& balance,string cnic) {
     int option;
@@ -563,176 +236,19 @@ void zongbundles(bool (*function)(),void (*function2)(string,double,double&), do
     };
     double prices[15] = {20, 50, 100, 150, 200, 250, 500, 300, 400, 600, 70, 350, 500, 700, 1000};
 
-    switch (option){
-        case 1:
-            cout << "You Have Selected " << bundlename[0] << " Bundle. The Price is Rs. " << prices[0] << "\n";
-            if (function())
-            {
-                balance = balance - prices[0];
-                loadamount = prices[0];
-                cout << "Your Transaction is Successfully Completed. " << "\n";
-                cout << "Your New Balance is  Rs. " << balance << "\n\n";
-               function2(cnic, loadamount, balance);
-            }
-            break;
-        case 2:
-            cout << "You Have Selected " << bundlename[1] << " Bundle. The Price is Rs. " << prices[1] << "\n";
-            if (function())
-            {
-                balance = balance - prices[1];
-                loadamount = prices[1];
-                cout << "Your Transaction is Successfully Completed. " << "\n";
-                cout << "Your New Balance is  Rs. " << balance << "\n\n";
-               function2(cnic, loadamount, balance);
-            }
-            break;
-        case 3: 
-            cout << "You Have Selected " << bundlename[2] << " Bundle. The Price is Rs. " << prices[2] << "\n";
-            if (function())
-            {
-                balance = balance - prices[2];
-                loadamount = prices[2];
-                cout << "Your Transaction is Successfully Completed. " << "\n";
-                cout << "Your New Balance is  Rs. " << balance << "\n\n";
-               function2(cnic, loadamount, balance);
-            }   
-            break;
-        case 4:
-            cout << "You Have Selected " << bundlename[3] << " Bundle. The Price is Rs. " << prices[3] << "\n";
-            if (function())
-            {
-                balance = balance - prices[3];
-                loadamount = prices[3];
-                cout << "Your Transaction is Successfully Completed. " << "\n";
-                cout << "Your New Balance is  Rs. " << balance << "\n\n";
-               function2(cnic, loadamount, balance);
-            }
-            break;
-        case 5: 
-            cout << "You Have Selected " << bundlename[4] << " Bundle. The Price is Rs. " << prices[4] << "\n";
-            if (function())
-            {
-                balance = balance - prices[4];
-                loadamount = prices[4];   
-                cout << "Your Transaction is Successfully Completed. " << "\n";
-                cout << "Your New Balance is  Rs. " << balance << "\n\n";
-               function2(cnic, loadamount, balance);
-            }
-            break;
-        case 6:
-            cout << "You Have Selected " << bundlename[5] << " Bundle. The Price is Rs. " << prices[5] << "\n";
-            if (function())
-            {
-                balance = balance - prices[5];
-                loadamount = prices[5];
-                cout << "Your Transaction is Successfully Completed. " << "\n";
-                cout << "Your New Balance is  Rs. " << balance << "\n\n";
-               function2(cnic, loadamount, balance);
-            }
-            break;
-        case 7:
-            cout << "You Have Selected " << bundlename[6] << " Bundle. The Price is Rs. " << prices[6] << "\n";
-            if (function())
-            {
-                balance = balance - prices[6];
-                loadamount = prices[6];
-                cout << "Your Transaction is Successfully Completed. " << "\n";
-                cout << "Your New Balance is  Rs. " << balance << "\n\n";
-               function2(cnic, loadamount, balance);
-            }
-            break;
-        case 8:
-            cout << "You Have Selected " << bundlename[7] << " Bundle. The Price is Rs. " << prices[7] << "\n";
-            if (function())
-            {
-                balance = balance - prices[7];
-                loadamount = prices[7];
-                cout << "Your Transaction is Successfully Completed. " << "\n";
-                cout << "Your New Balance is  Rs. " << balance << "\n\n";
-               function2(cnic, loadamount, balance);
+    if (option > 0 && option <= 15) {
+        int index = option - 1;
+        cout << "You Have Selected " << bundlename[index] << " Bundle. The Price is Rs. " << prices[index] << "\n";
+        if (function()) {
+            balance -= prices[index];
+            loadamount = prices[index];
+            cout << "Your Transaction is Successfully Completed. " << "\n";
+            cout << "Your New Balance is  Rs. " << balance << "\n\n";
+            function2(cnic, loadamount, balance);
         }
-            break;
-        case 9:
-            cout << "You Have Selected " << bundlename[8] << " Bundle. The Price is Rs. " << prices[8] << "\n";
-            if (function())
-            {
-                balance = balance - prices[8];
-                loadamount = prices[8];   
-                cout << "Your Transaction is Successfully Completed. " << "\n";
-                cout << "Your New Balance is  Rs. " << balance << "\n\n";
-               function2(cnic, loadamount, balance);
-            }
-            break;
-        case 10:
-            cout << "You Have Selected " << bundlename[9] << " Bundle. The Price is Rs. " << prices[9] << "\n";
-            if (function())
-            {
-                balance = balance - prices[9];
-                loadamount = prices[9];
-                cout << "Your Transaction is Successfully Completed. " << "\n";
-                cout << "Your New Balance is  Rs. " << balance << "\n\n";
-               function2(cnic, loadamount, balance);
-            }
-            break;
-        case 11:    
-            cout << "You Have Selected " << bundlename[10] << " Bundle. The Price is Rs. " << prices[10] << "\n";
-            if (function())
-            {
-                balance = balance - prices[10];
-                loadamount = prices[10];
-                cout << "Your Transaction is Successfully Completed. " << "\n";
-                cout << "Your New Balance is  Rs. " << balance << "\n\n";
-               function2(cnic, loadamount, balance);
-            }
-            break;
-        case 12:
-            cout << "You Have Selected " << bundlename[11] << " Bundle. The Price is Rs. " << prices[11] << "\n";
-            if (function())
-            {
-                balance = balance - prices[11];
-                loadamount = prices[11];
-                cout << "Your Transaction is Successfully Completed. " << "\n";
-                cout << "Your New Balance is  Rs. " << balance << "\n\n";
-               function2(cnic, loadamount, balance);
-            }
-            break;
-        case 13:
-            cout << "You Have Selected " << bundlename[12] << " Bundle. The Price is Rs. " << prices[12] << "\n";
-            if (function())
-            {
-                balance = balance - prices[12];
-                loadamount = prices[12];
-                cout << "Your Transaction is Successfully Completed. " << "\n";
-                cout << "Your New Balance is  Rs. " << balance << "\n\n";
-               function2(cnic, loadamount, balance);
-            }
-            break;
-        case 14:
-            cout << "You Have Selected " << bundlename[13] << " Bundle. The Price is Rs. " << prices[13] << "\n";
-            if (function())
-            {
-                balance = balance - prices[13];
-                loadamount = prices[13];
-                cout << "Your Transaction is Successfully Completed. " << "\n";
-                cout << "Your New Balance is  Rs. " << balance << "\n\n";
-               function2(cnic, loadamount, balance);
-            }
-            break;
-        case 15:
-            cout << "You Have Selected " << bundlename[14] << " Bundle. The Price is Rs. " << prices[14] << "\n";
-            if (function())
-            {
-                balance = balance - prices[14];
-                loadamount = prices[14];
-                cout << "Your Transaction is Successfully Completed. " << "\n";
-                cout << "Your New Balance is  Rs. " << balance << "\n\n";
-               function2(cnic, loadamount, balance);
-            }
-            break;
-        default:
-            cout << "Invalid Selection. Please Enter a Valid Option. \n";
-            break;
-            }
+    } else {
+        cout << "Invalid Selection. Please Enter a Valid Option. \n";
+    }
 }
 void ufonebundles(bool (*function)(), void (*function2)(string,double,double&),double& balance,string cnic) {
     int option;
@@ -763,176 +279,19 @@ void ufonebundles(bool (*function)(), void (*function2)(string,double,double&),d
     };
     double prices[15] = {10, 30, 50, 100, 150, 120, 250, 500, 700, 1000, 70, 300, 400, 600, 800};
 
-    switch (option){
-        case 1:
-            cout << "You Have Selected " << bundlename[0] << " Bundle. The Price is Rs. " << prices[0] << "\n";
-            if (function())
-            {
-                balance = balance - prices[0];
-                loadamount = prices[0];
-                cout << "Your Transaction is Successfully Completed. " << "\n";
-                cout << "Your New Balance is  Rs. " << balance << "\n\n";
-               function2(cnic, loadamount, balance);
-            }
-            break;
-        case 2:
-            cout << "You Have Selected " << bundlename[1] << " Bundle. The Price is Rs. " << prices[1] << "\n";
-            if (function())
-            {
-                balance = balance - prices[1];
-                loadamount = prices[1];
-                cout << "Your Transaction is Successfully Completed. " << "\n";
-                cout << "Your New Balance is  Rs. " << balance << "\n\n";
-               function2(cnic, loadamount, balance);
-            }
-            break;
-        case 3: 
-            cout << "You Have Selected " << bundlename[2] << " Bundle. The Price is Rs. " << prices[2] << "\n";
-            if (function())
-            {
-                balance = balance - prices[2];
-                loadamount = prices[2];
-                cout << "Your Transaction is Successfully Completed. " << "\n";
-                cout << "Your New Balance is  Rs. " << balance << "\n\n";
-               function2(cnic, loadamount, balance);
-            }   
-            break;
-        case 4:
-            cout << "You Have Selected " << bundlename[3] << " Bundle. The Price is Rs. " << prices[3] << "\n";
-            if (function())
-            {
-                balance = balance - prices[3];
-                loadamount = prices[3];
-                cout << "Your Transaction is Successfully Completed. " << "\n";
-                cout << "Your New Balance is  Rs. " << balance << "\n\n";
-               function2(cnic, loadamount, balance);
-            }
-            break;
-        case 5: 
-            cout << "You Have Selected " << bundlename[4] << " Bundle. The Price is Rs. " << prices[4] << "\n";
-            if (function())
-            {
-                balance = balance - prices[4];
-                loadamount = prices[4];   
-                cout << "Your Transaction is Successfully Completed. " << "\n";
-                cout << "Your New Balance is  Rs. " << balance << "\n\n";
-               function2(cnic, loadamount, balance);
-            }
-            break;
-        case 6:
-            cout << "You Have Selected " << bundlename[5] << " Bundle. The Price is Rs. " << prices[5] << "\n";
-            if (function())
-            {
-                balance = balance - prices[5];
-                loadamount = prices[5];
-                cout << "Your Transaction is Successfully Completed. " << "\n";
-                cout << "Your New Balance is  Rs. " << balance << "\n\n";
-               function2(cnic, loadamount, balance);
-            }
-            break;
-        case 7:
-            cout << "You Have Selected " << bundlename[6] << " Bundle. The Price is Rs. " << prices[6] << "\n";
-            if (function())
-            {
-                balance = balance - prices[6];
-                loadamount = prices[6];
-                cout << "Your Transaction is Successfully Completed. " << "\n";
-                cout << "Your New Balance is  Rs. " << balance << "\n\n";
-               function2(cnic, loadamount, balance);
-            }
-            break;
-        case 8:
-            cout << "You Have Selected " << bundlename[7] << " Bundle. The Price is Rs. " << prices[7] << "\n";
-            if (function())
-            {
-                balance = balance - prices[7];
-                loadamount = prices[7];
-                cout << "Your Transaction is Successfully Completed. " << "\n";
-                cout << "Your New Balance is  Rs. " << balance << "\n\n";
-               function2(cnic, loadamount, balance);
+    if (option > 0 && option <= 15) {
+        int index = option - 1;
+        cout << "You Have Selected " << bundlename[index] << " Bundle. The Price is Rs. " << prices[index] << "\n";
+        if (function()) {
+            balance -= prices[index];
+            loadamount = prices[index];
+            cout << "Your Transaction is Successfully Completed. " << "\n";
+            cout << "Your New Balance is  Rs. " << balance << "\n\n";
+            function2(cnic, loadamount, balance);
         }
-            break;
-        case 9:
-            cout << "You Have Selected " << bundlename[8] << " Bundle. The Price is Rs. " << prices[8] << "\n";
-            if (function())
-            {
-                balance = balance - prices[8];
-                loadamount = prices[8];   
-                cout << "Your Transaction is Successfully Completed. " << "\n";
-                cout << "Your New Balance is  Rs. " << balance << "\n\n";
-               function2(cnic, loadamount, balance);
-            }
-            break;
-        case 10:
-            cout << "You Have Selected " << bundlename[9] << " Bundle. The Price is Rs. " << prices[9] << "\n";
-            if (function())
-            {
-                balance = balance - prices[9];
-                loadamount = prices[9];
-                cout << "Your Transaction is Successfully Completed. " << "\n";
-                cout << "Your New Balance is  Rs. " << balance << "\n\n";
-               function2(cnic, loadamount, balance);
-            }
-            break;
-        case 11:    
-            cout << "You Have Selected " << bundlename[10] << " Bundle. The Price is Rs. " << prices[10] << "\n";
-            if (function())
-            {
-                balance = balance - prices[10];
-                loadamount = prices[10];
-                cout << "Your Transaction is Successfully Completed. " << "\n";
-                cout << "Your New Balance is  Rs. " << balance << "\n\n";
-               function2(cnic, loadamount, balance);
-            }
-            break;
-        case 12:
-            cout << "You Have Selected " << bundlename[11] << " Bundle. The Price is Rs. " << prices[11] << "\n";
-            if (function())
-            {
-                balance = balance - prices[11];
-                loadamount = prices[11];
-                cout << "Your Transaction is Successfully Completed. " << "\n";
-                cout << "Your New Balance is  Rs. " << balance << "\n\n";
-               function2(cnic, loadamount, balance);
-            }
-            break;
-        case 13:
-            cout << "You Have Selected " << bundlename[12] << " Bundle. The Price is Rs. " << prices[12] << "\n";
-            if (function())
-            {
-                balance = balance - prices[12];
-                loadamount = prices[12];
-                cout << "Your Transaction is Successfully Completed. " << "\n";
-                cout << "Your New Balance is  Rs. " << balance << "\n\n";
-               function2(cnic, loadamount, balance);
-            }
-            break;
-        case 14:
-            cout << "You Have Selected " << bundlename[13] << " Bundle. The Price is Rs. " << prices[13] << "\n";
-            if (function())
-            {
-                balance = balance - prices[13];
-                loadamount = prices[13];
-                cout << "Your Transaction is Successfully Completed. " << "\n";
-                cout << "Your New Balance is  Rs. " << balance << "\n\n";
-               function2(cnic, loadamount, balance);
-            }
-            break;
-        case 15:
-            cout << "You Have Selected " << bundlename[14] << " Bundle. The Price is Rs. " << prices[14] << "\n";
-            if (function())
-            {
-                balance = balance - prices[14];
-                loadamount = prices[14];
-                cout << "Your Transaction is Successfully Completed. " << "\n";
-                cout << "Your New Balance is  Rs. " << balance << "\n\n";
-               function2(cnic, loadamount, balance);
-            }
-            break;
-        default:
-            cout << "Invalid Selection. Please Enter a Valid Option. \n";
-            break;
-            }
+    } else {
+        cout << "Invalid Selection. Please Enter a Valid Option. \n";
+    }
 }
 
 
@@ -1082,6 +441,10 @@ bool loadvariableinfo( string& name, string& cnic, double& notfixedacc, double& 
     }
   
     data.close();
+    if (!data.is_open()) {
+        cout << "Error: Unable to open file.\n";
+        return false;
+    }
     return false;
 }
 // Function to validate login by checking CNIC, username, and password
@@ -1636,7 +999,7 @@ int main()
     // Declaring Variables
     double deposit = 0, balance = 0, withdrawal = 0, notfixedacc = 0,
     transfermoney=0;
-    int transferoption,walletnumber,accountoption, option, tryagain = 4,tryagainn = 4;
+    int transferoption, option,accountoption,walletnumber, tryagain = 4,tryagainn = 4;
     string receiveraccount,name,cnic, fixedaccnbr = "05101324",pin,username,password;
     ofstream recenttrans;
 
@@ -1657,7 +1020,7 @@ int main()
         
     
         // Creating Account
-        if (accountoption == 1)
+    if (accountoption == 1)
         {
             
             cout << "Enter Your Name : ";
@@ -1708,6 +1071,7 @@ int main()
                 cout << "You Failed to Enter Valid Pin, Returning Back to Main Menu. \n";
                 return 0;
            }
+    }
           cout << "Pin is Valid. Proceeding... \n";
                   // Creating User name and Password For Banking Services
             cout << "Thanks For Creating Account in Sharif Bank Ltd, Please Create a UserName and Password to Enjoy our Banking Services.\n";
@@ -1725,23 +1089,23 @@ int main()
             savenewaccounts(name,  cnic, notfixedacc, balance ,pin);
             savetransaction(name,cnic,notfixedacc,balance);
             savelogindata(cnic,username,password);
-            break;
+            return 0;
             
 
 }
 
 
-        }
+
 
         // Login Back into Account
-        else if (accountoption == 2)
+    else if (accountoption == 2)
         {
             string usercnic,userpass,username;
             cout << "Enter Your CNIC : " ;
             cin >> usercnic;
             
             cout << "Enter Your User Name : " ;
-            cin.ignore();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
             getline (cin,username);
             
             cout << "Enter Your Password : " ;
@@ -1837,7 +1201,7 @@ int main()
                 cout << "Enter the 11 Digit User Account Number : ";
                 cin >> receiveraccount;
                 if (!checklenghtwallet(receiveraccount)){
-                cout << "Please Enter a Valid Account Number ! " << endl;
+                cout << "Please Enter a Valid Account Number ! " << "\n\n";
                 break;
                 }
                  
@@ -1943,6 +1307,7 @@ int main()
                 while (getline(recentfile, transaction)) {
                     cout << transaction << "\n";
                 }
+                cout << "\n";
                 recentfile.close();
             }
             else {
