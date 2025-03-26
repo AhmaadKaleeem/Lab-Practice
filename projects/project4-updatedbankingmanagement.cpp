@@ -1,13 +1,16 @@
 // Project: Bank Account Management System
 /* Features:
-Create an Account : User enters their details,deposit,create pin and gets a new account number.
-Deposit Money : User can deposit money into their account.
-Withdraw Money : User can withdraw money, but only if the balance allows.
-Display Account Information : Shows account number, balance, and recent transactions.
-Modify Pin : Can Change or Reset Pin Code 
-Send Money : User can send money to any bank.
-Load and Bundles : User can buy new bundles and load of any Pakistani Number
-PUBG UC : User which are Pubg Lover can buy Uc through Bank. */
+
+✅ Account Management – Creating accounts with unique CNIC validation, PIN verification, and login credentials.
+✅ Secure Login – Validating username & password against registered CNIC.
+✅ Deposits & Withdrawals – Ensuring transactions follow deposit/withdrawal limits and balance constraints.
+✅ Fund Transfers – Supporting transfers to bank accounts & mobile wallets with format validation.
+✅ Transaction History – Logging every deposit, withdrawal, and transfer.
+✅ Credential Management – Modifying or resetting PIN, username, and password.
+✅ Mobile Load & Bundles – Loading balance to various operators with correct number validation.
+
+
+*/
 
 #include <iostream>
 #include <fstream> // For File Handling
@@ -1121,7 +1124,7 @@ int main()
         cout << "Please Select an Option to Proceed ! \n\n";
         cout << "1. Deposit Money in Your Account" << "\n" << "2. Withdrawl Money From Your Account " << "\n" 
              << "3. Transfer Money " << "\n" << "4. View Account Information " << "\n"  
-             << "5. Credintials Management " << "\n" << "6. Load and Bundles" << "\n" 
+             << "5. Credentials Management " << "\n" << "6. Load and Bundles" << "\n" 
              << "7. Exit " << "\n\n";
         option = checkinputtype("Enter the Selected Option : ");
 
@@ -1131,9 +1134,10 @@ int main()
         {
             // Validate Pin To Deposit
             if (pincheck(pin))
-            {
+            {    
+                cout << "Deposit Limit is Rs. 1000000. \n";
                 deposit = checkinputtype("Enter The Amount To Deposit Into Your Account : Rs. ");
-                if (deposit >= 0)
+                if (deposit >= 0 && deposit <= 1000000 )
                 {
                     balance = balance + deposit;
                     cout << "Your Transaction is Successfully Completed. " << "\n";
@@ -1141,6 +1145,10 @@ int main()
                     // Calling Function to Log Details into the File        
                     depositamount(usercnic,deposit, balance);
                    
+                }
+                else if (deposit > 1000000)
+                {
+                    cout << "Sorry! You Can't Deposit More Than Rs. 1000000. ";
                 }
                 else
                 {
@@ -1155,9 +1163,10 @@ int main()
         {
             // Validate Pin to Withdraw
             if (pincheck(pin))
-            {
+            { 
+                cout << "Withdrawal Limit is Rs. 100000. \n";
                 withdrawal = checkinputtype("Enter The Amount To Withdrawal From Your Account : Rs. ");
-                if (balance > withdrawal && withdrawal > 0)
+                if (balance > withdrawal && withdrawal > 0 && withdrawal <= 100000)
                 {
                     balance = balance - withdrawal;
                     cout << "Your Transaction is Successfully Completed. " << "\n";
@@ -1165,6 +1174,10 @@ int main()
 
                     // Calling Function to Log Details into the File        
                     withdrawamount(usercnic,withdrawal, balance);
+                }
+                else if (withdrawal > 100000)
+                {
+                    cout << "Sorry! You Can't Withdraw More Than Rs. 100000. ";
                 }
                 else if (balance < withdrawal)
                 {
